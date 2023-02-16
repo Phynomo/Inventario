@@ -7,7 +7,7 @@
 
 
 	 <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com"  />
     <link href="https://fonts.googleapis.com/css2?family=Karla:wght@200;300;400;500&display=swap" rel="stylesheet" />
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" rel="stylesheet" />
@@ -40,8 +40,7 @@ h1 > a {
   color: #ffffff; }
   @media (max-width: 991px) {
     .intro-section {
-      padding-left: 50px;
-      padding-rigth: 50px; } }
+        padding:0px 50px 0px 50px; } }
   @media (max-width: 767px) {
     .intro-section {
       padding: 28px; } }
@@ -124,8 +123,6 @@ h1 > a {
     .login-wrapper .form-control::-moz-placeholder {
       color: #b0adad; }
     .login-wrapper .form-control:-ms-input-placeholder {
-      color: #b0adad; }
-    .login-wrapper .form-control::-ms-input-placeholder {
       color: #b0adad; }
     .login-wrapper .form-control::placeholder {
       color: #b0adad; }
