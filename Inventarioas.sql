@@ -11,7 +11,7 @@ GO
 
 CREATE TABLE tbUsuarios(
 	usu_Id					INT IDENTITY(1,1),
-	usu_Usuario				NVARCHAR(100) NOT NULL UNIQUE,
+	usu_Usuario				NVARCHAR(150) NOT NULL UNIQUE,
 	usu_Contrasenia			NVARCHAR(MAX) NOT NULL,
 	emp_Id					INT not null,
 	usu_UsuarioCreacion		INT not null,
@@ -80,7 +80,7 @@ CREATE TABLE tbMunicipios(
 --Categorias
 CREATE TABLE tbCategoria(
 cat_Id INT IDENTITY(1,1),
-cat_Descripcion NVARCHAR (100) NOT NULL,
+cat_Descripcion NVARCHAR (150) NOT NULL,
 cat_FechaCreacion		DATETIME not null,
 cat_UsuarioCreacion		INT not null,
 cat_FechaModificacion	DATETIME,
@@ -104,7 +104,7 @@ CONSTRAINT PK_dbo_tbCategoria_cat_Id PRIMARY KEY(cat_Id),
 --Cargos
 CREATE TABLE tbCargos(
 	car_Id					INT IDENTITY(1,1) NOT NULL,
-	car_Nombre				NVARCHAR(90) NOT NULL,
+	car_Nombre				NVARCHAR(150) NOT NULL,
 	car_FechaCreacion		DATETIME not null,
 	car_UsuarioCreacion		INT not null,
 	car_FechaModificacion	DATETIME,
@@ -147,7 +147,7 @@ prov_Nombre                         NVARCHAR(250) not null,
 mun_Id								CHAR(04) NOT NULL,
 prov_DireccionExacta                NVARCHAR(500),
 prov_Telefono                       VARCHAR(50),
-prov_Email                          NVARCHAR(50) not null,
+prov_Email                          NVARCHAR(150) not null,
 prov_FechaCreacion					DATETIME not null,
 prov_UsuarioCreacion				INT not null,
 prov_FechaModificacion				DATETIME,
@@ -174,7 +174,7 @@ CONSTRAINT FK_dbo_tbProveedores_dbo_tbUsuarios_prov_UsuarioModificacion_usu_Id F
 --Productos
 CREATE TABLE tbProductos(
 pro_Id			INT IDENTITY(1,1),
-pro_Nombre		NVARCHAR (100) NOT NULL,
+pro_Nombre		NVARCHAR (150) NOT NULL,
 pro_Precio		DECIMAL (18,2) NOT NULL,
 cat_Id			INT not null,
 prov_id			INT not null,
@@ -210,8 +210,8 @@ CONSTRAINT FK_dbo_tbProductos_dbo_tbUsuarios_pro_UsuarioModificacion_usu_Id FORE
 --Clientes
 CREATE TABLE tbClientes(
 cli_Id                              INT IDENTITY (1,1),
-cli_Nombre							NVARCHAR(100) NOT NULL,
-cli_Apellido						NVARCHAR(100) NOT NULL,
+cli_Nombre							NVARCHAR(150) NOT NULL,
+cli_Apellido						NVARCHAR(150) NOT NULL,
 mun_Id								CHAR(04) NOT NULL,
 cli_DireccionExacta					NVARCHAR(500) NOT NULL,
 cli_Telefono						NVARCHAR(20) NOT NULL,
@@ -249,8 +249,8 @@ CONSTRAINT FK_dbo_tbClientes_dbo_tbUsuarios_cli_UsuarioModificacion_usu_Id FOREI
 --Empleados
 CREATE TABLE tbEmpleados(
 emp_Id                              INT IDENTITY (1,1),
-emp_Nombre							NVARCHAR(100) NOT NULL,
-emp_Apellido						NVARCHAR(100) NOT NULL,
+emp_Nombre							NVARCHAR(150) NOT NULL,
+emp_Apellido						NVARCHAR(150) NOT NULL,
 emp_Sexo							CHAR(1) NOT NULL,
 mun_Id								CHAR(04) NOT NULL,
 emp_DireccionExacta					NVARCHAR(500) NOT NULL,
@@ -849,7 +849,7 @@ create or alter procedure UDP_EditarProveedores
 @Municipio nvarchar(200),
 @Direccion nvarchar(500),
 @Telefono nvarchar(20),
-@Email  nvarchar(100),
+@Email  nvarchar(150),
 @UsuarioModificacion INT
 as
 begin
@@ -917,7 +917,7 @@ GO
 
 --Insertar Usuario
 CREATE PROCEDURE UDP_InsertarUsuario
-	@Usuario Nvarchar(100),
+	@Usuario Nvarchar(150),
 	@Contrasenia Nvarchar(max),
 	@Empleado int,
 	@usuarioCreacion int
