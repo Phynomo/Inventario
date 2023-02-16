@@ -17,5 +17,18 @@ namespace Inventario.Clases
         }
 
 
+        public void InsertarFacturaDetalles(string FacturaId, string ProductoId, string Cantidad, string UsuarioCreacion)
+        {
+            string sql = $"EXEC UDP_InsertarFacturaDetalles '{FacturaId}', '{ProductoId}', '{Cantidad}', '{UsuarioCreacion}'";
+            util.ObtenerDS(sql, "T");
+        }
+
+
+        public void EliminarFactura(string id) 
+        {
+            string sql = $"EXEC UDP_BorrarFactura '{id}'";
+            util.ObtenerDS(sql, "T");
+        }
+
     }
 }

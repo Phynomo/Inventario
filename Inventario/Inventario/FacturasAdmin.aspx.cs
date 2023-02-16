@@ -21,15 +21,6 @@ namespace Inventario
                 DataSet ds = util.ObtenerDS($"EXEC UDP_IndexFacturaDetalles '{Session["FacDetalles"].ToString()}'", "T");
 
 
-                //txtCliente.Text = ds.Tables["T"].Rows[0]["nombreCliente"].ToString();
-                //txtEmpleado.Text = ds.Tables["T"].Rows[0]["nombreEmpleado"].ToString();
-                //txtMetodo.Text = ds.Tables["T"].Rows[0]["metpago_Descripcion"].ToString();
-                //txtFacturaId.Text = ds.Tables["T"].Rows[0]["fac_Id"].ToString();
-                //txtFechaFactura.Text = ds.Tables["T"].Rows[0]["fac_Fecha"].ToString();
-                //txtSubTotal.Text = ds.Tables["T"].Rows[0]["Subtotal"].ToString();
-                //txtIva.Text = ds.Tables["T"].Rows[0]["IVA"].ToString();
-                //txtTotal.Text = ds.Tables["T"].Rows[0]["Total"].ToString();
-
                 StringBuilder html = new StringBuilder();
                 Literal cadena = new Literal();
 
@@ -41,7 +32,7 @@ namespace Inventario
                         fila["facd_Precio"] + "</td><td>" +
                         fila["facd_catidad"] + "</td><td>" +
                         fila["CantidadPrecio"] + "</td><td>" +
-                        "<a class='fa fa-trash btn btn-block btn-danger' style='color: black' onclick='Eliminar(" + fila["fac_Id"] + ")' ></a>" + "</td></tr>"
+                        "<a class='fa fa-trash btn btn-block btn-danger' style='color: black' onclick='Eliminar(" + fila["facd_Id"] + ")' ></a>" + "</td></tr>"
 
                     );
                 }
@@ -53,47 +44,144 @@ namespace Inventario
 
         }
 
-
+        public void Eliminar(string id) 
+        {
+            string sqlEliminarDetalle = $"DELETE FROM [dbo].[tbFDetalles] WHERE facd_Id = '{id}'";
+            util.ObtenerDS(sqlEliminarDetalle, "T");
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            lblClienteAste.Visible = false;
+            lblMetodoPagoAste.Visible = false;
+            lblProductoAste.Visible = false;
+            lblCantidadAste.Visible = false;
+
+
             if (!IsPostBack)
             {
+                
                 ddlProducto.Enabled = false;
                 txtCantidad.Enabled = false;
                 btnAgregarProducto.Enabled = false;
+                string sqlClientes = $"SELECT [cli_Id] ,[cli_Nombre]+' '+[cli_Apellido] as nombre FROM [dbo].[tbClientes] Where cli_Estado = 1";
+                util.CargarDdl(sqlClientes, ddlCliente);
+
+                string sqlMetodosPago = $"SELECT [metpago_Id] ,[metpago_Descripcion] FROM [dbo].[tbMetodoPago] WHERE metpago_Estado = 1";
+                util.CargarDdl(sqlMetodosPago, ddlMetodoPago);
+
+                string sqlProductos = $"SELECT [pro_Id],[pro_Nombre] FROM [dbo].[tbProductos] WHERE pro_Estado = 1 AND pro_stock > 0";
+                util.CargarDdl(sqlProductos, ddlProducto);
+
+                cargarTabla();
+
+                if (Session["FacDetalles"] != null)
+                {
+                    CargarDatos(Session["FacDetalles"].ToString());
+                }
+
+
+            }
+            else
+            {
+                string eventtarget = Request["__EVENTTARGET"];
+                string eventargument = Request["__EVENTARGUMENT"];
+
+                if (eventtarget == "Eliminar")
+                {
+                    Eliminar(eventargument);
+                    cargarTabla();
+                }
             }
             
-            cargarTabla();
-            string sqlClientes = $"SELECT [cli_Id] ,[cli_Nombre]+' '+[cli_Apellido] as nombre FROM [dbo].[tbClientes] Where cli_Estado = 1";
-            util.CargarDdl(sqlClientes, ddlCliente);
-
-            string sqlMetodosPago = $"SELECT [metpago_Id] ,[metpago_Descripcion] FROM [dbo].[tbMetodoPago] WHERE metpago_Estado = 1";
-            util.CargarDdl(sqlMetodosPago, ddlMetodoPago);
-
-            string sqlProductos = $"SELECT [pro_Id],[pro_Nombre] FROM [dbo].[tbProductos] WHERE pro_Estado = 1";
-            util.CargarDdl(sqlProductos, ddlProducto);
+            
         }
+
+
+        public void CargarDatos( string id) 
+        {
+            if (Session["FacDetalles"] != null)
+            {
+                DataSet ds = new DataSet();
+                string sql = $"EXEC UDP_IndexFacturaDetalles '{id}'";
+                ds = util.ObtenerDS(sql, "T");
+
+                ddlCliente.SelectedValue = ds.Tables["T"].Rows[0]["cli_Id"].ToString();
+                ddlMetodoPago.SelectedValue = ds.Tables["T"].Rows[0]["metpago_Id"].ToString();
+
+                ddlCliente.Enabled = false;
+                ddlMetodoPago.Enabled = false;
+                btnComenzar.Enabled = false;
+                ddlProducto.Enabled = true;
+                txtCantidad.Enabled = true;
+                btnAgregarProducto.Enabled = true;
+
+                //cargarTabla();
+            }
+        }
+
+
 
         protected void btnAgregarProducto_Click(object sender, EventArgs e)
         {
+            if (ddlProducto.SelectedValue != "0" && txtCantidad.Text != "")
+            {
+                factu.InsertarFacturaDetalles(Session["FacDetalles"].ToString(), ddlProducto.SelectedValue, txtCantidad.Text, "1");
+                cargarTabla();
+            }
+            else
+            {
 
+                if (ddlProducto.SelectedValue == "0")
+                {
+                    lblProductoAste.Visible = true;
+                }
+                if (txtCantidad.Text == "")
+                {
+                    lblCantidadAste.Visible = false;
+                }
+            }
+
+            
         }
 
         protected void btnComenzar_Click(object sender, EventArgs e)
         {
+            if (ddlCliente.SelectedValue != "0" && ddlMetodoPago.SelectedValue != "0")
+            {
+                factu.InsertarFactura(ddlCliente.SelectedValue, "1", "1", ddlMetodoPago.SelectedValue);
 
-            factu.InsertarFactura(ddlCliente.SelectedValue, "1", "1", ddlMetodoPago.SelectedValue);
+                string sql = "SELECT MAX(fac_Id) as Maximo FROM [Tienda_Inventario].[dbo].[tbFactura]";
+                DataSet ds = new DataSet();
+                ds = util.ObtenerDS(sql, "T");
+                Session["FacDetalles"] = ds.Tables["T"].Rows[0]["Maximo"].ToString();
+                ddlCliente.Enabled = false;
+                ddlMetodoPago.Enabled = false;
+                ddlProducto.Enabled = true;
+                txtCantidad.Enabled = true;
+                btnAgregarProducto.Enabled = true;
+            }
+            else
+            {
+                
+                if (ddlCliente.SelectedValue == "0")
+                {
+                    lblClienteAste.Visible = true;
+                }
+                if (ddlMetodoPago.SelectedValue == "0")
+                {
+                    lblMetodoPagoAste.Visible = true;
+                }
+            }
 
-            string sql = "SELECT MAX(fac_Id) as Maximo FROM [Tienda_Inventario].[dbo].[tbFactura]";
-            DataSet ds = new DataSet();
-            ds = util.ObtenerDS(sql, "T");
-            Session["FacDetalles"] = ds.Tables["T"].Rows[0]["Maximo"].ToString();
-            ddlCliente.Enabled = false;
-            ddlMetodoPago.Enabled = false;
-            ddlProducto.Enabled = true;
-            txtCantidad.Enabled = true;
-            btnAgregarProducto.Enabled = true;
+            
+        }
+
+        protected void btnFinalizar_Click(object sender, EventArgs e)
+        {
+            Session["FacDetalles"] = null;
+            Response.Redirect("FacturasIndex.aspx");
         }
     }
 }

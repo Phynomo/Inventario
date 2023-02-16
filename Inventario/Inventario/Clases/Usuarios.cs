@@ -27,6 +27,14 @@ namespace Inventario.Clases
             util.ObtenerDS(sql, "T");
         }
 
+        
+
+        public void CambiarContrasenia(string Usuario, string Contrasenia)
+        {
+            string sql = $"EXEC UDP_CambiarContrasenia '{Usuario}', '{Contrasenia}'";
+            util.ObtenerDS(sql, "T");
+        }
+
 
     }
 }

@@ -13,6 +13,7 @@ namespace Inventario
     {
 
         Clases.Utilitarios util = new Clases.Utilitarios();
+        Clases.Facturas fact = new Clases.Facturas();
 
         public void cargarTabla()
         {
@@ -55,13 +56,9 @@ namespace Inventario
                 string eventtarget = Request["__EVENTTARGET"];
                 string eventargument = Request["__EVENTARGUMENT"];
 
-                if (eventtarget == "Editar" || Session["IdUsuarios"] != null)
+                if (eventtarget == "Editar" || Session["FacDetalles"] != null)
                 {
-
                     Editar(eventargument);
-                    Response.Write("<script src='Content/js/jquery-3.1.1.min.js'></script>");
-                    Response.Write("<script src = 'Content/js/bootstrap.js' ></script>");
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "myFuncionAlerta", "ModalEditar();", true);
                 }
 
                 if (eventtarget == "Eliminar")
@@ -82,23 +79,22 @@ namespace Inventario
 
         public void Editar(string id)
         {
-            if (Session["IdUsuarios"] == null)
-            {
-                //Session["IdUsuarios"] = id;
-                //CargarDatos(id);
-            }
+            
+            Session["FacDetalles"] = id;
+            Response.Redirect("FacturasAdmin.aspx");
 
         }
 
 
         public void Eliminar(string id)
         {
-            //usu.EliminarUsuario(id);
-            //Response.Redirect("UsuariosIndex.aspx");
+            fact.EliminarFactura(id);
+            Response.Redirect("FacturasIndex.aspx");
         }
 
         protected void btnNuevo_ServerClick(object sender, EventArgs e)
         {
+            Session["FacDetalles"] = null;
             Response.Redirect("FacturasAdmin.aspx");
         }
     }

@@ -24,6 +24,15 @@ namespace Inventario
         protected global::System.Web.UI.WebControls.Label lblClinte;
 
         /// <summary>
+        /// Control lblClienteAste.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblClienteAste;
+
+        /// <summary>
         /// Control ddlCliente.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,15 @@ namespace Inventario
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMetodoPago;
+
+        /// <summary>
+        /// Control lblMetodoPagoAste.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMetodoPagoAste;
 
         /// <summary>
         /// Control ddlMetodoPago.
@@ -69,6 +87,15 @@ namespace Inventario
         protected global::System.Web.UI.WebControls.Label lblProducto;
 
         /// <summary>
+        /// Control lblProductoAste.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblProductoAste;
+
+        /// <summary>
         /// Control ddlProducto.
         /// </summary>
         /// <remarks>
@@ -85,6 +112,15 @@ namespace Inventario
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblCantidad;
+
+        /// <summary>
+        /// Control lblCantidadAste.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCantidadAste;
 
         /// <summary>
         /// Control txtCantidad.

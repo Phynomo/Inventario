@@ -43,6 +43,14 @@ namespace Inventario
         protected void Page_Load(object sender, EventArgs e)
         {
             cargarTabla();
+
+            lblUsuarioGuardarAste.Visible = false;
+            lblEmpleadoGuardarAste.Visible = false;
+            lblContraseniaGuardarAste.Visible = false;
+            lblContraseniaEditarAste.Visible = false;
+            lblEmpleadoEditarAste.Visible = false;
+
+
             if (!IsPostBack)
             {
                 string sql = "SELECT [emp_Id],[emp_Nombre]+' '+[emp_Apellido] as emp_Nombre FROM [Tienda_Inventario].[dbo].[tbEmpleados]WHERE emp_Estado = 1";
@@ -97,6 +105,21 @@ namespace Inventario
                 Session["IdUsuarios"] = null;
                 Response.Redirect("UsuariosIndex.aspx");
             }
+            else
+            {
+                if (txtUsuarioGuardar.Text == "")
+                {
+                    lblUsuarioGuardarAste.Visible = true;
+                }
+                if (txtContraseniaGuardar.Text == "")
+                {
+                    lblContraseniaGuardarAste.Visible = true;
+                }
+                if (ddlEmpleadoGuardar.SelectedValue == "0")
+                {
+                    lblEmpleadoGuardarAste.Visible = true;
+                }
+            }
         }
 
 
@@ -118,6 +141,17 @@ namespace Inventario
                 usu.EditarUsuario(Session["IdUsuarios"].ToString(), txtContraseniaEditar.Text, ddlEmpleadoEditar.SelectedValue, "1");
                 Session["IdUsuarios"] = null;
                 Response.Redirect("UsuariosIndex.aspx");
+            }
+            else
+            {
+                if (txtContraseniaEditar.Text == "")
+                {
+                    lblContraseniaEditarAste.Visible = true;
+                }
+                if (ddlEmpleadoEditar.SelectedValue == "0")
+                {
+                    lblEmpleadoEditarAste.Visible = true;
+                }
             }
         }
 

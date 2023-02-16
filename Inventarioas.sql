@@ -436,6 +436,34 @@ CONSTRAINT FK_dbo_tbCDetalles_dbo_tbUsuarios_comd_UsuarioModificacion_usu_Id FOR
 
 go
 
+CREATE TRIGGER trg_AumentarStockluegoBorrar
+   ON  [dbo].[tbFDetalles]
+   AFTER Delete
+AS 
+BEGIN
+	
+
+	DECLARE @NuevoStock int = (select t1.pro_Stock from [tbProductos] as t1 WHERE t1.pro_Id = (select t1.pro_Id from deleted as t1)) + (select t1.facd_catidad from deleted as t1 WHERE t1.pro_Id = (select t1.pro_Id from deleted as t1))
+
+UPDATE [dbo].[tbProductos]
+   SET [pro_Stock] = @NuevoStock
+ WHERE pro_Id = (select t1.pro_Id from deleted as t1)
+
+
+END
+GO
+go
+
+-------------------------------------------------------------------------------------------
+
+
+
+-------------------------------------------------------------------------------------------
+
+
+
+go
+
 CREATE TRIGGER trg_AumentarStock
    ON  [dbo].[tbCDetalles]
    AFTER INSERT
@@ -1168,6 +1196,8 @@ BEGIN
 SELECT [facd_Id]
       ,t5.[fac_Id]
 	  ,t6.fac_Fecha
+	  ,t2.cli_Id
+	  ,t4.metpago_Id
 	  ,t2.cli_Nombre + ' ' + t2.cli_Apellido as nombreCliente
 	  ,t3.emp_Nombre + ' ' + t3.emp_Apellido as nombreEmpleado
       ,t5.[pro_Id]
@@ -1199,8 +1229,7 @@ SELECT [facd_Id]
 END
 GO
 
---index / buscar FacturaDetalles
-
+--Insertar Factura
 CREATE OR ALTER PROCEDURE UDP_InsertarFactura
 @ClienteId Nvarchar(100),
 @MetodoPago Nvarchar(100),
@@ -1233,4 +1262,80 @@ INSERT INTO [dbo].[tbFactura]
 END
 GO
 
+--Borrar Factura
+CREATE OR ALTER PROCEDURE UDP_BorrarFactura
+	@IdEdicion INT
+AS
+BEGIN
 
+UPDATE [dbo].[tbFactura]
+   SET fac_Estado = 0
+ WHERE fac_Id = @IdEdicion
+
+UPDATE [dbo].[tbFDetalles]
+   SET [facd_Estado] = 0
+ WHERE fac_Id = @IdEdicion
+
+
+END
+GO
+
+
+
+
+--Insertar FacturaDetalle
+CREATE OR ALTER PROCEDURE UDP_InsertarFacturaDetalles
+@FacturaId Nvarchar(100),
+@ProductoId Nvarchar(100),
+@Cantidad Nvarchar(100),
+@UsuarioCreacion Nvarchar(100)
+AS
+BEGIN
+
+Declare @Precio Nvarchar(100) = (select pro_Precio From tbProductos WHERE pro_Estado = 1 and pro_Id = @ProductoId)
+
+INSERT INTO [dbo].[tbFDetalles]
+           ([fac_Id]
+           ,[pro_Id]
+           ,[facd_catidad]
+           ,[facd_Precio]
+           ,[facd_FechaCreacion]
+           ,[facd_UsuarioCreacion]
+           ,[facd_FechaModificacion]
+           ,[facd_UsuarioModificacion]
+           ,[facd_Estado])
+     VALUES
+           (@FacturaId
+           ,@ProductoId
+           ,@Cantidad
+           ,@Precio
+           ,GETDATE()
+           ,@UsuarioCreacion
+           ,null
+           ,null
+           ,1)
+
+
+
+
+END
+GO
+
+
+
+--Cambiar Contrasenia
+CREATE PROCEDURE UDP_CambiarContrasenia
+	@Usuario Nvarchar(200),
+	@Contrasenia Nvarchar(max)
+AS
+BEGIN
+
+Declare @Password Nvarchar(max) = (HASHBYTES('SHA2_512',@Contrasenia))
+
+UPDATE [dbo].[tbUsuarios]
+   SET [usu_Contrasenia] = @Password
+ WHERE usu_Usuario = @Usuario
+
+
+END
+GO

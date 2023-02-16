@@ -10,11 +10,11 @@
         <div class="card-body">
             <div class="row text-center d-flex justify-content-center">
                 <div class="col">
-                    <asp:Label ID="lblClinte" runat="server" Text="Cliente"></asp:Label>
+                    <asp:Label ID="lblClinte" runat="server" Text="Cliente"></asp:Label><asp:Label ID="lblClienteAste" runat="server" ForeColor="Red" Text="*"></asp:Label>
                     <asp:DropDownList ID="ddlCliente"  CssClass="form-control" runat="server"></asp:DropDownList>
                 </div>
                 <div class="col">
-                    <asp:Label ID="lblMetodoPago" runat="server" Text="Metodo de pago"></asp:Label>
+                    <asp:Label ID="lblMetodoPago" runat="server" Text="Metodo de pago"></asp:Label><asp:Label ID="lblMetodoPagoAste" runat="server" ForeColor="Red" Text="*"></asp:Label>
                     <asp:DropDownList ID="ddlMetodoPago"  CssClass="form-control" runat="server"></asp:DropDownList>
                 </div>
             </div>
@@ -25,11 +25,11 @@
             </div>
             <div class="row mt-4">
                 <div class="col">
-                    <asp:Label ID="lblProducto" runat="server" Text="Producto"></asp:Label>
+                    <asp:Label ID="lblProducto" runat="server" Text="Producto"></asp:Label><asp:Label ID="lblProductoAste" runat="server" ForeColor="Red" Text="*"></asp:Label>
                     <asp:DropDownList ID="ddlProducto"  CssClass="form-control" runat="server"></asp:DropDownList>
                 </div>
                 <div class="col">
-                    <asp:Label ID="lblCantidad" runat="server" Text="Cantidad"></asp:Label>
+                    <asp:Label ID="lblCantidad" runat="server" Text="Cantidad"></asp:Label><asp:Label ID="lblCantidadAste" runat="server" ForeColor="Red" Text="*"></asp:Label>
                     <asp:TextBox ID="txtCantidad" CssClass="form-control" runat="server"></asp:TextBox>
                 </div>
             </div>
@@ -61,7 +61,7 @@
 
             <div class="row text-center mt-2">
                 <div class="col">
-                    <asp:Button ID="btnFinalizar" CssClass="btn btn-block btn-warning" runat="server" Text="FinalizarCompra" />
+                    <asp:Button ID="btnFinalizar" OnClick="btnFinalizar_Click" CssClass="btn btn-block btn-warning" runat="server" Text="FinalizarCompra" />
                 </div>
             </div>
 
