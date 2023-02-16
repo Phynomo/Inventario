@@ -7,7 +7,7 @@
                 <h4><asp:Label Text="Usuarios" runat="server" /> </h4> 
             </div>
             <div class="col d-flex flex-row-reverse">
-               <button  type="button" class="btn btn-block btn-primary" id="btnNuevo" onclick="ModalGuardar()">Nuevo</button>
+               <button  type="button" class="btn btn-primary" id="btnNuevo" onclick="ModalGuardar()">Nuevo</button>
             </div>
         </div>
         <div class="card-body">

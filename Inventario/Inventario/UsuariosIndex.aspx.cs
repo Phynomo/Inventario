@@ -27,8 +27,8 @@ namespace Inventario
                     fila["usu_Id"] + "</td><td>" +
                     fila["usu_Usuario"] + "</td><td>" +
                     fila["emp_Nombre"] + "</td><td>" +
-                    "<a class='fa fa-pencil btn btn-warning' style='color: black' onclick='Editar(" + fila["usu_Id"] + ")' >Editar</a>" + "</td><td>" +
-                    "<a class='fa fa-trash btn btn-danger' style='color: black' onclick='Eliminar(" + fila["usu_Id"] + ")' >Borrar</a>" + "</td></tr>"
+                    "<a class='fa fa-pencil btn btn-block btn-warning' style='color: black' onclick='Editar(" + fila["usu_Id"] + ")' ></a>" + "</td><td>" +
+                    "<a class='fa fa-trash btn btn-block btn-danger' style='color: black' onclick='Eliminar(" + fila["usu_Id"] + ")' ></a>" + "</td></tr>"
 
 
                 );

@@ -1123,3 +1123,114 @@ UPDATE [dbo].[tbCargos]
 
 END
 GO
+
+
+
+--index / buscar Facturas
+
+CREATE PROCEDURE UDP_IndexFacturas
+AS
+BEGIN
+
+
+SELECT [fac_Id]
+      ,t1.[cli_Id]
+	  , t2.cli_Nombre + ' ' + t2.cli_Apellido as nombreCliente
+      ,[fac_Fecha]
+      ,t1.[emp_id]
+	  ,t3.emp_Nombre + ' ' + t3.emp_Apellido as nombreEmpleado
+      ,t1.[metpago_Id]
+	  ,t4.metpago_Descripcion
+      ,[fac_FechaCreacion]
+      ,[fac_UsuarioCreacion]
+      ,[fac_FechaModificacion]
+      ,[fac_UsuarioModificacion]
+      ,[fac_Estado]
+  FROM [dbo].[tbFactura] t1 INNER JOIN [dbo].[tbClientes] t2
+  ON t2.cli_Id = t1.cli_Id INNER JOIN [dbo].[tbEmpleados] t3
+  ON t3.emp_Id = t1.emp_id INNER JOIN [dbo].[tbMetodoPago] t4
+  ON t4.metpago_Id = t1.metpago_Id
+  WHERE fac_Estado = 1
+
+
+END
+GO
+
+
+
+--index / buscar FacturaDetalles
+
+CREATE OR ALTER PROCEDURE UDP_IndexFacturaDetalles
+@FacturaId int
+AS
+BEGIN
+
+SELECT [facd_Id]
+      ,t5.[fac_Id]
+	  ,t6.fac_Fecha
+	  ,t2.cli_Nombre + ' ' + t2.cli_Apellido as nombreCliente
+	  ,t3.emp_Nombre + ' ' + t3.emp_Apellido as nombreEmpleado
+      ,t5.[pro_Id]
+	  ,t7.pro_Nombre
+	  ,t8.prov_Nombre
+	  ,t4.metpago_Descripcion
+      ,[facd_catidad]
+      ,[facd_Precio]
+	  ,[facd_catidad] * [facd_Precio] as CantidadPrecio
+	  ,(select SUM([facd_catidad] * [facd_Precio]) from [dbo].[tbFDetalles] WHERE facd_Estado = 1 AND fac_Id = @FacturaId) as Subtotal
+	  ,(select SUM(([facd_catidad] * [facd_Precio]) *0.15) from [dbo].[tbFDetalles] WHERE facd_Estado = 1 AND fac_Id = @FacturaId) as IVA
+	  ,(select SUM(([facd_catidad] * [facd_Precio]) + (([facd_catidad] * [facd_Precio]) *0.15)) from [dbo].[tbFDetalles] WHERE facd_Estado = 1 AND fac_Id = @FacturaId) as Total
+      ,[facd_FechaCreacion]
+      ,[facd_UsuarioCreacion]
+      ,[facd_FechaModificacion]
+      ,[facd_UsuarioModificacion]
+      ,[facd_Estado]
+  FROM [dbo].[tbFDetalles] t5 INNER JOIN [dbo].[tbFactura] t6
+  ON t5.fac_Id = t6.fac_Id INNER JOIN  [dbo].[tbClientes] t2
+  ON t2.cli_Id = t6.cli_Id INNER JOIN [dbo].[tbEmpleados] t3
+  ON t3.emp_Id = t6.emp_id INNER JOIN [dbo].[tbMetodoPago] t4
+  ON t4.metpago_Id = t6.metpago_Id INNER JOIN [dbo].[tbProductos] t7
+  ON t7.pro_Id = t5.pro_Id INNER JOIN [dbo].[tbProveedores] t8
+  ON t8.prov_Id = t7.prov_id
+  WHERE facd_Estado = 1 AND t5.fac_Id = @FacturaId
+
+
+
+END
+GO
+
+--index / buscar FacturaDetalles
+
+CREATE OR ALTER PROCEDURE UDP_InsertarFactura
+@ClienteId Nvarchar(100),
+@MetodoPago Nvarchar(100),
+@EmpleadoId Nvarchar(100),
+@UsuarioCreacion Nvarchar(100)
+AS
+BEGIN
+INSERT INTO [dbo].[tbFactura]
+           ([cli_Id]
+           ,[fac_Fecha]
+           ,[emp_id]
+           ,[metpago_Id]
+           ,[fac_FechaCreacion]
+           ,[fac_UsuarioCreacion]
+           ,[fac_FechaModificacion]
+           ,[fac_UsuarioModificacion]
+           ,[fac_Estado])
+     VALUES
+           (@ClienteId
+           ,GETDATE()
+           ,@EmpleadoId
+           ,@MetodoPago
+           ,GETDATE()
+           ,@UsuarioCreacion
+           ,null
+           ,null
+           ,1)
+
+
+END
+GO
+
+

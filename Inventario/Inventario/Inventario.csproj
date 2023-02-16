@@ -605,6 +605,9 @@
     <Content Include="Content\js\plugins\wow\wow.min.js" />
     <Content Include="Content\js\popper.min.js" />
     <Content Include="Content\Site.css" />
+    <Content Include="FacturasAdmin.aspx" />
+    <Content Include="FacturasDetalles.aspx" />
+    <Content Include="FacturasIndex.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -745,9 +748,31 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Clases\CnxBasedeDatos.cs" />
+    <Compile Include="Clases\Facturas.cs" />
     <Compile Include="Clases\Proveedor.cs" />
     <Compile Include="Clases\Usuarios.cs" />
     <Compile Include="Clases\Utilitarios.cs" />
+    <Compile Include="FacturasAdmin.aspx.cs">
+      <DependentUpon>FacturasAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FacturasAdmin.aspx.designer.cs">
+      <DependentUpon>FacturasAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FacturasDetalles.aspx.cs">
+      <DependentUpon>FacturasDetalles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FacturasDetalles.aspx.designer.cs">
+      <DependentUpon>FacturasDetalles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FacturasIndex.aspx.cs">
+      <DependentUpon>FacturasIndex.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FacturasIndex.aspx.designer.cs">
+      <DependentUpon>FacturasIndex.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
