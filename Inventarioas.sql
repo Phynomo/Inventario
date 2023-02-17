@@ -1843,7 +1843,7 @@ end
 go
 
 
---Procedimiento Insertar Producto
+--Prsocedimiento Insertar Producto
 create or alter procedure UDP_InsertarProductos
 @Nombre nvarchar(220),
 @Precio decimal,
