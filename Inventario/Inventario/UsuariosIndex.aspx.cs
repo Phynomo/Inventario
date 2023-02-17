@@ -56,6 +56,8 @@ namespace Inventario
                 string sql = "SELECT [emp_Id],[emp_Nombre]+' '+[emp_Apellido] as emp_Nombre FROM [Tienda_Inventario].[dbo].[tbEmpleados]WHERE emp_Estado = 1";
                 util.CargarDdl(sql, ddlEmpleadoGuardar);
                 util.CargarDdl(sql, ddlEmpleadoEditar);
+                ddlEmpleadoEditar.SelectedValue = "1";
+                ddlEmpleadoGuardar.SelectedValue = "1";
             }
             else
             {
@@ -75,6 +77,21 @@ namespace Inventario
                 {
                     Eliminar(eventargument);
                 }
+
+                if (txtContraseniaEditar.Text == "" || ddlEmpleadoEditar.SelectedValue == "0")
+                {
+                    Response.Write("<script src='Content/js/jquery-3.1.1.min.js'></script>");
+                    Response.Write("<script src = 'Content/js/bootstrap.js' ></script>");
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "myFuncionAlerta", "ModalEditar();", true);
+                }
+
+                if (txtUsuarioGuardar.Text == "" || txtContraseniaGuardar.Text == "" || ddlEmpleadoGuardar.SelectedValue == "0")
+                {
+                    Response.Write("<script src='Content/js/jquery-3.1.1.min.js'></script>");
+                    Response.Write("<script src = 'Content/js/bootstrap.js' ></script>");
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "myFuncionAlerta", "ModalGuardar();", true);
+                }
+
             }
         }
 
@@ -128,7 +145,7 @@ namespace Inventario
             DataSet ds = new DataSet();
             string sql = $"SELECT * FROM [Tienda_Inventario].[dbo].[tbUsuarios] Where usu_Id = '{id}'";
             ds = util.ObtenerDS(sql, "T");
-
+            txtContraseniaEditar.Text = "";
             ddlEmpleadoEditar.SelectedValue = ds.Tables["T"].Rows[0]["emp_Id"].ToString();
 
         }
@@ -159,6 +176,16 @@ namespace Inventario
         {
             Session["IdUsuarios"] = null;
             Response.Redirect("UsuariosIndex.aspx");
+        }
+
+        protected void btnNuevo_ServerClick(object sender, EventArgs e)
+        {
+            txtUsuarioGuardar.Text = "";
+            txtContraseniaGuardar.Text = "";
+            ddlEmpleadoGuardar.Text = "0";
+            Response.Write("<script src='Content/js/jquery-3.1.1.min.js'></script>");
+            Response.Write("<script src = 'Content/js/bootstrap.js' ></script>");
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "myFuncionAlerta", "ModalGuardar();", true);
         }
     }
 }

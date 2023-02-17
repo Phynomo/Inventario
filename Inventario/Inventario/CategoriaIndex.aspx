@@ -7,7 +7,7 @@
                 <h4><asp:Label Text="Categorias" runat="server" /> </h4> 
             </div>
             <div class="col d-flex flex-row-reverse">
-               <button  type="button" class="btn btn-primary" id="btnNuevo" onclick="ModalGuardar()">Nuevo</button>
+               <button  type="button" class="btn btn-primary" id="btnNuevo" runat="server" onserverclick="btnNuevo_ServerClick">Nuevo</button>
             </div>
         </div>
         <div class="card-body">
@@ -44,13 +44,13 @@
                     <div class="col">
                         <asp:Label CssClass="" ID="lblCategoriaGuardar" runat="server" Text="Categoria"></asp:Label>
                         <asp:Label CssClass="" ID="lblCategoriaGuardarAste" ForeColor="Red" runat="server" Text="*"></asp:Label>
-                        <asp:TextBox CssClass="form-control" ID="txtCategoriaGuardar" runat="server"></asp:TextBox>
+                        <asp:TextBox CssClass="form-control" ID="txtCategoriaGuardar" runat="server">Hola</asp:TextBox>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                         <asp:Button CssClass="btn btn-primary" ID="btnGuardar" OnClick="btnGuardar_Click" runat="server" Text="Guardar registro" />
-                        <button type="button" class="btn btn-secondary" runat="server" id="btnCerrarG" onserverclick="btnCancelar_ServerClick" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" runat="server" id="btnCerrarG" onserverclick="btnCancelar_ServerClick" data-dismiss="modal">Cerrar</button>
             </div>
           </div>
         </div>
@@ -68,13 +68,13 @@
                     <div class="col">
                         <asp:Label CssClass="" ID="lblCategoriaEditar" runat="server" Text="Categoria"></asp:Label>
                         <asp:Label CssClass="" ID="lblCategoriaEditarAste" ForeColor="Red" runat="server" Text="*"></asp:Label>
-                        <asp:TextBox CssClass="form-control" ID="txtCategoriaEditar" runat="server"></asp:TextBox>
+                        <asp:TextBox CssClass="form-control" ID="txtCategoriaEditar" runat="server">Hola</asp:TextBox>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                        <asp:Button CssClass="btn btn-primary" ID="btnEditar" OnClick="btnEditar_Click" runat="server" Text="Guardar registro" />
-                        <button type="button" class="btn btn-secondary" runat="server" id="btnCancelarEditar" onserverclick="btnCancelar_ServerClick" data-dismiss="modal">Close</button>
+                        <asp:Button CssClass="btn btn-warning" ID="btnEditar" OnClick="btnEditar_Click" runat="server" Text="Guardar registro" />
+                        <button type="button" class="btn btn-secondary" runat="server" id="btnCancelarEditar" onserverclick="btnCancelar_ServerClick" data-dismiss="modal">Cerrar</button>
             </div>
           </div>
         </div>
@@ -84,7 +84,8 @@
      <script>
         function ModalGuardar() {
             //$('#mdlGuardar').modal('show');
-            $('#mdlGuardar').modal({ backdrop: 'static', keyboard: false })
+            $('#mdlGuardar').modal({ backdrop: 'static', keyboard: false });
+            
         }
         function ModalEditar() {
             //$('#mdlEditar').modal('show');

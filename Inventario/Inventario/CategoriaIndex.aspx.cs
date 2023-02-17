@@ -48,6 +48,7 @@ namespace Inventario
 
             if (!IsPostBack)
             {
+                Session["IdCategoria"] = null;
             }
             else
             {
@@ -67,6 +68,21 @@ namespace Inventario
                 {
                     Eliminar(eventargument);
                 }
+
+                if (txtCategoriaEditar.Text == "")
+                {
+                    Response.Write("<script src='Content/js/jquery-3.1.1.min.js'></script>");
+                    Response.Write("<script src = 'Content/js/bootstrap.js' ></script>");
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "myFuncionAlerta", "ModalEditar();", true);
+                }
+
+                if (txtCategoriaGuardar.Text == "")
+                {
+                    Response.Write("<script src='Content/js/jquery-3.1.1.min.js'></script>");
+                    Response.Write("<script src = 'Content/js/bootstrap.js' ></script>");
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "myFuncionAlerta", "ModalGuardar();", true);
+                }
+
             }
         }
 
@@ -141,7 +157,12 @@ namespace Inventario
             Response.Redirect("CategoriaIndex.aspx");
         }
 
-
-
+        protected void btnNuevo_ServerClick(object sender, EventArgs e)
+        {
+            txtCategoriaGuardar.Text = "";
+            Response.Write("<script src='Content/js/jquery-3.1.1.min.js'></script>");
+            Response.Write("<script src = 'Content/js/bootstrap.js' ></script>");
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "myFuncionAlerta", "ModalGuardar();", true);
+        }
     }
 }

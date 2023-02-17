@@ -1598,3 +1598,297 @@ UPDATE [dbo].[tbCategoria]
 
 END
 GO
+
+
+
+
+
+--------------------------------------------------------------------
+
+
+-- Index prooveedores
+create or alter procedure UDP_BuscarProveedores
+@frase nvarchar(250)
+as
+begin
+
+
+SELECT   prov_Id,
+		 prov_Nombre, 
+		 t1.mun_Id, 
+		 t2.mun_Nombre + ', '+ t3.dep_Nombre AS mun_Nombre,
+		 prov_DireccionExacta, 
+		 prov_Telefono, 
+		 prov_Email, 
+		 prov_FechaCreacion, 
+		 prov_UsuarioCreacion, 
+		 prov_FechaModificacion,
+		  prov_UsuarioModificacion, 
+		  prov_Estado     
+FROM            tbProveedores t1 INNER JOIN  [dbo].[tbMunicipios]  t2
+ON t1.mun_Id = t2.mun_Id INNER JOIN [dbo].[tbDepartamentos] t3 
+ON t2.dep_Id = t3.dep_Id
+WHERE  (( prov_Id LIKE '%'+@frase+'%')
+or     (prov_Nombre LIKE '%'+@frase+'%')
+or     (prov_DireccionExacta LIKE '%'+@frase+'%')
+or     ( prov_Telefono LIKE '%'+@frase+'%')
+or     ( prov_Email LIKE '%'+@frase+'%'))
+AND t1.prov_Estado = 1
+end 
+GO
+
+
+
+
+--Procedimiento Editar Proveedor
+
+create or alter procedure UDP_EditarProveedores
+@id int,
+@Nombre nvarchar(220),
+@Municipio nvarchar(200),
+@Direccion nvarchar(500),
+@Telefono nvarchar(20),
+@Email  nvarchar(100),
+@UsuarioModificacion INT
+as
+begin
+
+
+update tbProveedores
+set prov_Nombre = @Nombre,
+    mun_Id= @Municipio,
+	prov_DireccionExacta = @Direccion,
+    prov_Telefono= @Telefono,
+	prov_Email=@Email,
+	prov_FechaModificacion=  GETDATE(),
+	prov_UsuarioModificacion = @UsuarioModificacion
+where prov_Id=@id
+end
+
+go
+--Procedimiento Eliminar Proveedor
+create or alter procedure UDP_EliminarProveedores
+@id int
+as
+begin
+
+update tbProveedores
+set prov_Estado = 0
+where prov_Id=@id
+
+end
+go
+
+
+ --Insertar Proveedores
+
+ 
+ 
+create or alter procedure UDP_InsertarProveedores
+@Nombre nvarchar(220),
+@Municipio nvarchar(200),
+@Direccion nvarchar(500),
+@Telefono nvarchar(20),
+@Email  nvarchar(100),
+@UsuarioCreacion INT
+as
+begin
+INSERT INTO [dbo].[tbProveedores]
+           ([prov_Nombre]
+           ,[mun_Id]
+           ,[prov_DireccionExacta]
+           ,[prov_Telefono]
+           ,[prov_Email]
+           ,[prov_FechaCreacion]
+           ,[prov_UsuarioCreacion]
+           ,[prov_FechaModificacion]
+           ,[prov_UsuarioModificacion]
+           ,[prov_Estado])
+     VALUES
+           (@Nombre,@Municipio,@Direccion,@Telefono,@Email,GetDate(),1,null,null ,1)
+
+end
+go
+--Procedimiento Index cliente
+create or alter procedure UDP_LlenarCliente
+as
+begin
+SELECT  cli_Id
+      ,cli_Nombre
+      ,cli_Apellido
+	  ,t1.mun_Id
+      ,t2.mun_Nombre + ', '+ t3.dep_Nombre AS mun_Nombre
+      ,cli_DireccionExacta
+      ,cli_Telefono
+      ,cli_CorreoElectronico
+      ,cli_FechaCreacion
+      ,cli_UsuarioCreacion
+      ,cli_FechaModificacion
+      ,cli_UsuarioModificacion
+      ,cli_Estado
+FROM tbClientes t1 INNER JOIN  [dbo].[tbMunicipios]  t2
+ON t1.mun_Id = t2.mun_Id INNER JOIN [dbo].[tbDepartamentos] t3 
+ON t2.dep_Id = t3.dep_Id
+WHERE  t1.cli_Estado = 1
+end 
+go
+--UDP_LlenarCliente
+
+--Procedimiento Insertar clientes
+
+create or alter procedure UDP_InsertarClientes
+@Nombre nvarchar(220),
+@Apellido nvarchar(220),
+@Municipio nvarchar(200),
+@Direccion nvarchar(500),
+@Telefono nvarchar(20),
+@Email  nvarchar(100),
+@UsuarioCreacion INT
+as
+begin
+INSERT INTO  tbClientes
+       (
+       cli_Nombre
+      ,cli_Apellido
+	  ,mun_Id
+      ,cli_DireccionExacta
+      ,cli_Telefono
+      ,cli_CorreoElectronico
+      ,cli_FechaCreacion
+      ,cli_UsuarioCreacion
+      ,cli_FechaModificacion
+      ,cli_UsuarioModificacion
+      ,cli_Estado)
+     VALUES
+           (@Nombre,@Apellido,@Municipio,@Direccion,@Telefono,@Email,GetDate(),1,null,null ,1)
+end
+go
+
+--Procedimiento Editar Clientes
+create or alter procedure UDP_EditarClientes
+@id int,
+@Nombre nvarchar(220),
+@Apellido nvarchar(220),
+@Municipio nvarchar(200),
+@Direccion nvarchar(500),
+@Telefono nvarchar(20),
+@Email  nvarchar(100),
+@UsuarioModificacion INT
+as
+begin
+
+
+update tbClientes
+set cli_Nombre = @Nombre,
+    cli_Apellido = @Apellido,
+    mun_Id= @Municipio,
+	cli_DireccionExacta = @Direccion,
+    cli_Telefono= @Telefono,
+	cli_CorreoElectronico=@Email,
+	cli_FechaModificacion=  GETDATE(),
+	cli_UsuarioModificacion = @UsuarioModificacion
+where cli_Id=@id
+end
+go
+
+--Procedimiento Eliminar Clientes
+create or alter procedure UDP_EliminarClientes
+@id int
+as
+begin
+
+update tbClientes
+set cli_Estado = 0
+where cli_Id=@id
+
+end
+go
+
+
+--Procedimiento Index Producto
+create or alter procedure UDP_LlenarProductos
+as
+begin    
+SELECT pro_Id
+      ,pro_Nombre
+	  ,pro_Precio
+      ,t1.cat_Id
+	  ,t3.cat_Descripcion
+	  ,t1.prov_id
+	  ,t2.prov_Nombre 
+      ,pro_Stock
+      ,pro_FechaCreacion
+      ,pro_UsuarioCreacion
+      ,pro_FechaModificacion
+      ,pro_UsuarioModificacion
+	  ,pro_Estado 
+FROM tbProductos t1 INNER JOIN tbProveedores t2
+on t1.prov_id = t2.prov_Id INNER JOIN tbCategoria t3
+on t1.cat_Id = t3.cat_Id
+WHERE  t1. pro_Estado  = 1
+end 
+go
+--Procedimiento Borrar Producto
+
+create or alter procedure UDP_EliminarProducto
+@id int
+as
+begin
+
+update tbProductos
+set pro_Estado = 0
+where pro_Id=@id
+
+end
+go
+
+
+--Procedimiento Insertar Producto
+create or alter procedure UDP_InsertarProductos
+@Nombre nvarchar(220),
+@Precio decimal,
+@categoria int,
+@Proveedor int,
+@Stock int,
+@UsuarioCreacion int
+as
+begin
+INSERT INTO [dbo].[tbProductos]
+          ( 
+		   pro_Nombre, 
+		   pro_Precio, 
+		   cat_Id, 
+		   prov_id, 
+		   pro_Stock,
+		   pro_FechaCreacion, 
+		   pro_UsuarioCreacion, 
+		   pro_FechaModificacion, 
+		   pro_UsuarioModificacion, 
+		   pro_Estado)
+     VALUES
+           (@Nombre,@Precio,@categoria,@Proveedor,@Stock,GetDate(),@UsuarioCreacion,null,null ,1)
+
+end
+
+go
+--Procedimiento Editar Producto
+create or alter procedure UDP_EditarProducto
+@id int,
+@Nombre nvarchar(220),
+@Precio decimal,
+@categoria int,
+@Proveedor int,
+@Stock int,
+@UsuarioModificacion int
+as
+begin
+update tbProductos
+set  [pro_Nombre]= @Nombre,
+   [pro_Precio] =@Precio,
+   [cat_Id] = @categoria,
+	[prov_id] = @Proveedor ,
+    [pro_Stock]= @Stock,
+	[pro_FechaModificacion]=  GETDATE(),
+	[pro_UsuarioModificacion] = @UsuarioModificacion
+where [pro_Id]=@id
+end

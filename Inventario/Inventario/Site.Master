@@ -61,10 +61,10 @@
                             </div>
                         </li>
                         <li>
-                            <a href="FacturasIndex.aspx"><i class="fa fa-diamond"></i><span class="nav-label">Facturas</span></a>
+                            <a href="FacturasIndex.aspx"><i class="fa  fa-files-o"></i><span class="nav-label">Facturas</span></a>
                         </li>
                         <li>
-                            <a href="EmpleadosIndex.aspx"><i class="fa fa-files-o"></i><span class="nav-label">Empleados</span></a>
+                            <a href="EmpleadosIndex.aspx"><i class="fa fa-diamond"></i><span class="nav-label">Empleados</span></a>
                         </li>
                         <li>
                             <a href="UsuariosIndex.aspx"><i class="fa fa-diamond"></i><span class="nav-label">Usuarios</span></a>
@@ -74,6 +74,15 @@
                         </li>
                         <li>
                             <a href="CategoriaIndex.aspx"><i class="fa fa-diamond"></i><span class="nav-label">Categorias</span></a>
+                        </li>
+                        <li>
+                            <a href="ProductosIndex.aspx"><i class="fa fa-diamond"></i><span class="nav-label">Productos</span></a>
+                        </li>
+                        <li>
+                            <a href="ProveedoresIndex.aspx"><i class="fa fa-diamond"></i><span class="nav-label">Proveedores</span></a>
+                        </li>
+                        <li>
+                            <a href="ClientesIndex.aspx"><i class="fa fa-diamond"></i><span class="nav-label">Clientes</span></a>
                         </li>
                     </ul>
 
@@ -99,7 +108,7 @@
                     </nav>
                 </div>
 
-
+                
                 <asp:ContentPlaceHolder ID="MainContent" runat="server">
                 </asp:ContentPlaceHolder>
 

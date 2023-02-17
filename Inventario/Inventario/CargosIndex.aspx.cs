@@ -67,6 +67,23 @@ namespace Inventario
                 {
                     Eliminar(eventargument);
                 }
+
+                if (txtCargoEditar.Text == "")
+                {
+                    Response.Write("<script src='Content/js/jquery-3.1.1.min.js'></script>");
+                    Response.Write("<script src = 'Content/js/bootstrap.js' ></script>");
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "myFuncionAlerta", "ModalEditar();", true);
+                }
+
+                if (txtCargoGuardar.Text == "")
+                {
+                    Response.Write("<script src='Content/js/jquery-3.1.1.min.js'></script>");
+                    Response.Write("<script src = 'Content/js/bootstrap.js' ></script>");
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "myFuncionAlerta", "ModalGuardar();", true);
+                }
+
+
+
             }
 
         }
@@ -140,5 +157,12 @@ namespace Inventario
             Response.Redirect("CargosIndex.aspx");
         }
 
+        protected void btnNuevo_ServerClick(object sender, EventArgs e)
+        {
+            txtCargoGuardar.Text = "";
+            Response.Write("<script src='Content/js/jquery-3.1.1.min.js'></script>");
+            Response.Write("<script src = 'Content/js/bootstrap.js' ></script>");
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "myFuncionAlerta", "ModalGuardar();", true);
+        }
     }
 }

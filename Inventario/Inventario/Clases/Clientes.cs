@@ -7,15 +7,15 @@ using System.Web.UI.WebControls;
 
 namespace Inventario.Clases
 {
-    public class Proveedor
+    public class Clientes
     {
 
         Utilitarios util = new Utilitarios();
 
 
-        public void CargarGrid(GridView gv, string bqd)
+        public void CargarGrid(GridView gv)
         {
-            DataSet ds = util.ObtenerDS("UDP_Buscar '" + bqd + "'", "T");
+            DataSet ds = util.ObtenerDS("UDP_LlenarCliente ", "T");
             gv.DataSource = ds.Tables["T"];
             gv.DataBind();
 
@@ -26,7 +26,7 @@ namespace Inventario.Clases
         public DataSet cargarDatos(string id)
         {
             DataSet ds = new DataSet();
-            ds = util.ObtenerDS("select * from tbProveedores where prov_Id =" + int.Parse(id), "T");
+            ds = util.ObtenerDS("select * from tbClientes where cli_Id =" + int.Parse(id), "T");
             return ds;
         }
 
@@ -44,8 +44,9 @@ namespace Inventario.Clases
 
         public void Borrar(string id)
         {
-            util.ObtenerDS("UDP_EliminarProveedores " + "'" + int.Parse(id) + "'", "T");
+            util.ObtenerDS("UDP_EliminarClientes " + "'" + id + "'", "T");
         }
+
 
 
 

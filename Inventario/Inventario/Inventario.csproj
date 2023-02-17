@@ -108,6 +108,8 @@
     <Content Include="CambiarPassword.aspx" />
     <Content Include="CargosIndex.aspx" />
     <Content Include="CategoriaIndex.aspx" />
+    <Content Include="ClientesAdmin.aspx" />
+    <Content Include="ClientesIndex.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -714,6 +716,10 @@
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Inicio.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="ProductosAdmin.aspx" />
+    <Content Include="ProductosIndex.aspx" />
+    <Content Include="ProveedorAdmin.aspx" />
+    <Content Include="ProveedoresIndex.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -775,12 +781,28 @@
     </Compile>
     <Compile Include="Clases\Cargos.cs" />
     <Compile Include="Clases\Categorias.cs" />
+    <Compile Include="Clases\Clientes.cs" />
     <Compile Include="Clases\CnxBasedeDatos.cs" />
     <Compile Include="Clases\Empleados.cs" />
     <Compile Include="Clases\Facturas.cs" />
+    <Compile Include="Clases\Productos.cs" />
     <Compile Include="Clases\Proveedor.cs" />
     <Compile Include="Clases\Usuarios.cs" />
     <Compile Include="Clases\Utilitarios.cs" />
+    <Compile Include="ClientesAdmin.aspx.cs">
+      <DependentUpon>ClientesAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClientesAdmin.aspx.designer.cs">
+      <DependentUpon>ClientesAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClientesIndex.aspx.cs">
+      <DependentUpon>ClientesIndex.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClientesIndex.aspx.designer.cs">
+      <DependentUpon>ClientesIndex.aspx</DependentUpon>
+    </Compile>
     <Compile Include="EmpleadosAdmin.aspx.cs">
       <DependentUpon>EmpleadosAdmin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -833,7 +855,35 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ProductosAdmin.aspx.cs">
+      <DependentUpon>ProductosAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProductosAdmin.aspx.designer.cs">
+      <DependentUpon>ProductosAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProductosIndex.aspx.cs">
+      <DependentUpon>ProductosIndex.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProductosIndex.aspx.designer.cs">
+      <DependentUpon>ProductosIndex.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProveedorAdmin.aspx.cs">
+      <DependentUpon>ProveedorAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProveedorAdmin.aspx.designer.cs">
+      <DependentUpon>ProveedorAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProveedoresIndex.aspx.cs">
+      <DependentUpon>ProveedoresIndex.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProveedoresIndex.aspx.designer.cs">
+      <DependentUpon>ProveedoresIndex.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
