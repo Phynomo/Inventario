@@ -1508,3 +1508,93 @@ UPDATE [dbo].[tbCargos]
 END
 GO
 
+
+
+
+
+
+
+
+
+
+
+--Insertar Usuario
+CREATE OR ALTER PROCEDURE UDP_InsertarCategorias
+	@Categoria Nvarchar(150),
+	@usuarioCreacion int
+
+AS
+BEGIN
+
+INSERT INTO [dbo].[tbCategoria]
+           ([cat_Descripcion]
+           ,[cat_FechaCreacion]
+           ,[cat_UsuarioCreacion]
+           ,[cat_FechaModificacion]
+           ,[cat_UsuarioModificacion]
+           ,[cat_Estado])
+     VALUES
+           (@Categoria
+           ,GETDATE()
+           ,@usuarioCreacion
+           ,null
+           ,null
+           ,1)
+
+
+END
+GO
+
+--Index/Tabla Usuarios
+CREATE OR ALTER PROCEDURE UDP_IndexCategorias
+
+AS
+BEGIN
+
+SELECT [cat_Id]
+      ,[cat_Descripcion]
+      ,[cat_FechaCreacion]
+      ,[cat_UsuarioCreacion]
+      ,[cat_FechaModificacion]
+      ,[cat_UsuarioModificacion]
+      ,[cat_Estado]
+  FROM [dbo].[tbCategoria]
+WHERE cat_Estado = 1
+
+END
+GO
+
+
+--Editar Usuario 
+CREATE OR ALTER PROCEDURE UDP_EditarCategorias
+	@IdEdicion INT,
+	@Categoria Nvarchar(200),
+	@usuarioModificacion int
+AS
+BEGIN
+
+UPDATE [dbo].[tbCategoria]
+   SET [cat_Descripcion] = @Categoria
+      ,[cat_FechaModificacion] = GETDATE()
+      ,[cat_UsuarioModificacion] = @usuarioModificacion
+ WHERE cat_Id = @IdEdicion
+
+
+END
+GO
+
+
+--borrar Usuario
+CREATE OR ALTER PROCEDURE UDP_BorrarCaTegorias
+	@IdEdicion INT
+AS
+BEGIN
+
+
+UPDATE [dbo].[tbCategoria]
+   SET [cat_Estado] = 0
+ WHERE cat_Id = @IdEdicion
+
+
+END
+GO
