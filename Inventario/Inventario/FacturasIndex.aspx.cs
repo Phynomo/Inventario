@@ -56,7 +56,7 @@ namespace Inventario
                 string eventtarget = Request["__EVENTTARGET"];
                 string eventargument = Request["__EVENTARGUMENT"];
 
-                if (eventtarget == "Editar" || Session["FacDetalles"] != null)
+                if (eventtarget == "Editar")
                 {
                     Editar(eventargument);
                 }
@@ -68,8 +68,7 @@ namespace Inventario
 
                 if (eventtarget == "Detalles")
                 {
-                    Session["FacDetalles"] = eventargument;
-                    Response.Redirect("FacturasDetalles.aspx");
+                    Detalles(eventargument);
                 }
             }
 
@@ -85,6 +84,11 @@ namespace Inventario
 
         }
 
+        public void Detalles(string id) 
+        {
+            Session["FacDetalles"] = id;
+            Response.Redirect("FacturasDetalles.aspx");
+        }
 
         public void Eliminar(string id)
         {
@@ -94,7 +98,7 @@ namespace Inventario
 
         protected void btnNuevo_ServerClick(object sender, EventArgs e)
         {
-            Session["FacDetalles"] = null;
+            Session["FacDetalles"] = "";
             Response.Redirect("FacturasAdmin.aspx");
         }
     }

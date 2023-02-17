@@ -11,7 +11,19 @@ namespace Inventario
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["Nombre"] == null)
+            {
+                Response.Redirect("Login.aspx");
+            }
+        }
 
+        protected void btnOut_Click(object sender, EventArgs e)
+        {
+            Session["Nombre"] = null;
+            Session["IdUsuario"] = null;
+            Session["IdEmpleado"] = null;
+
+            Response.Redirect("Login.aspx");
         }
     }
 }

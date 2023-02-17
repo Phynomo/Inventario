@@ -18,9 +18,9 @@
                     <asp:DropDownList ID="ddlMetodoPago"  CssClass="form-control" runat="server"></asp:DropDownList>
                 </div>
             </div>
-            <div class="row mt-2">
+            <div class="row text-center mt-2">
                 <div class="col">
-                    <asp:Button ID="btnComenzar" runat="server"  CssClass="btn btn-block btn-success" OnClick="btnComenzar_Click" Text="Ingresar Productos" />
+                    <asp:Button ID="btnComenzar" runat="server"  CssClass="btn btn-success" OnClick="btnComenzar_Click" Text="Ingresar Productos" />
                 </div>
             </div>
             <div class="row mt-4">
@@ -35,7 +35,7 @@
             </div>
             <div class="row text-center mt-2">
                 <div class="col">
-                    <asp:Button ID="btnAgregarProducto" CssClass="btn btn-block btn-primary" OnClick="btnAgregarProducto_Click" runat="server" Text="Agregar" />
+                    <asp:Button ID="btnAgregarProducto" CssClass="btn btn-primary" OnClick="btnAgregarProducto_Click" runat="server" Text="Agregar producto" />
                 </div>
             </div>
 
@@ -61,7 +61,7 @@
 
             <div class="row text-center mt-2">
                 <div class="col">
-                    <asp:Button ID="btnFinalizar" OnClick="btnFinalizar_Click" CssClass="btn btn-block btn-warning" runat="server" Text="FinalizarCompra" />
+                    <asp:Button ID="btnFinalizar" OnClick="btnFinalizar_Click" CssClass="btn btn-warning" runat="server" Text="Finalizar Compra" />
                 </div>
             </div>
 

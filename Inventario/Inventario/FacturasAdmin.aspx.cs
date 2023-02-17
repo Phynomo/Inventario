@@ -16,7 +16,7 @@ namespace Inventario
         Clases.Facturas factu = new Clases.Facturas();
         public void cargarTabla()
         {
-            if (Session["FacDetalles"] != null)
+            if (Session["FacDetalles"] != null && Session["FacDetalles"].ToString() != "")
             {
                 DataSet ds = util.ObtenerDS($"EXEC UDP_IndexFacturaDetalles '{Session["FacDetalles"].ToString()}'", "T");
 
@@ -75,8 +75,8 @@ namespace Inventario
                 util.CargarDdl(sqlProductos, ddlProducto);
 
                 cargarTabla();
-
-                if (Session["FacDetalles"] != null)
+                string uno = Session["FacDetalles"].ToString();
+                if (Session["FacDetalles"] != null && Session["FacDetalles"].ToString() != "")
                 {
                     CargarDatos(Session["FacDetalles"].ToString());
                 }
@@ -101,7 +101,7 @@ namespace Inventario
 
         public void CargarDatos( string id) 
         {
-            if (Session["FacDetalles"] != null)
+            if (Session["FacDetalles"] != null && Session["FacDetalles"].ToString() != "")
             {
                 DataSet ds = new DataSet();
                 string sql = $"EXEC UDP_IndexFacturaDetalles '{id}'";
@@ -125,10 +125,32 @@ namespace Inventario
 
         protected void btnAgregarProducto_Click(object sender, EventArgs e)
         {
+
+            
+
+
             if (ddlProducto.SelectedValue != "0" && txtCantidad.Text != "")
             {
-                factu.InsertarFacturaDetalles(Session["FacDetalles"].ToString(), ddlProducto.SelectedValue, txtCantidad.Text, "1");
-                cargarTabla();
+                DataSet ds = new DataSet();
+                string sql = $"SELECT [pro_Stock] FROM [dbo].[tbProductos] WHERE pro_Estado = 1 AND pro_Id = '{ddlProducto.SelectedValue}'";
+                ds = util.ObtenerDS(sql, "T");
+
+                int stock = int.Parse(ds.Tables["T"].Rows[0]["pro_Stock"].ToString()) - int.Parse(txtCantidad.Text);
+
+                if (stock > 0)
+                {
+                    factu.InsertarFacturaDetalles(Session["FacDetalles"].ToString(), ddlProducto.SelectedValue, txtCantidad.Text, "1");
+                    cargarTabla();
+                    ddlProducto.SelectedValue = "0";
+                    txtCantidad.Text = "";
+                }
+                else
+                {
+                    lblCantidadAste.Visible = true;
+                    txtCantidad.Text = "";
+                    cargarTabla();
+                }
+                
             }
             else
             {
@@ -139,7 +161,7 @@ namespace Inventario
                 }
                 if (txtCantidad.Text == "")
                 {
-                    lblCantidadAste.Visible = false;
+                    lblCantidadAste.Visible = true;
                 }
             }
 
@@ -180,7 +202,7 @@ namespace Inventario
 
         protected void btnFinalizar_Click(object sender, EventArgs e)
         {
-            Session["FacDetalles"] = null;
+            Session["FacDetalles"] = "";
             Response.Redirect("FacturasIndex.aspx");
         }
     }

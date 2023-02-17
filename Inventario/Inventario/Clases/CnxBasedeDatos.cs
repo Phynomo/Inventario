@@ -15,10 +15,10 @@ namespace Inventario.Clases
         {
 
             //home
-            //con = @"data source = DESKTOP-51051C3\SQLEXPRESS; initial catalog = Tienda_Inventario; user id = dani2005; password = dani2005";
+            con = @"data source = DESKTOP-51051C3\SQLEXPRESS; initial catalog = Tienda_Inventario; user id = dani2005; password = dani2005";
 
             //altia
-            con = @"data source = DESKTOP-IU26N4Q\SQLEXPRESSLOCAL; initial catalog = Tienda_Inventario; user id = dani2005; password = dani2005";
+            //con = @"data source = DESKTOP-IU26N4Q\SQLEXPRESSLOCAL; initial catalog = Tienda_Inventario; user id = dani2005; password = dani2005";
 
             cnx.ConnectionString = con;
         }

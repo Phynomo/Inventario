@@ -106,6 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CambiarPassword.aspx" />
+    <Content Include="CargosIndex.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -606,6 +607,8 @@
     <Content Include="Content\js\plugins\wow\wow.min.js" />
     <Content Include="Content\js\popper.min.js" />
     <Content Include="Content\Site.css" />
+    <Content Include="EmpleadosAdmin.aspx" />
+    <Content Include="EmpleadosIndex.aspx" />
     <Content Include="FacturasAdmin.aspx" />
     <Content Include="FacturasDetalles.aspx" />
     <Content Include="FacturasIndex.aspx" />
@@ -755,11 +758,34 @@
     <Compile Include="CambiarPassword.aspx.designer.cs">
       <DependentUpon>CambiarPassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CargosIndex.aspx.cs">
+      <DependentUpon>CargosIndex.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CargosIndex.aspx.designer.cs">
+      <DependentUpon>CargosIndex.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Clases\Cargos.cs" />
     <Compile Include="Clases\CnxBasedeDatos.cs" />
+    <Compile Include="Clases\Empleados.cs" />
     <Compile Include="Clases\Facturas.cs" />
     <Compile Include="Clases\Proveedor.cs" />
     <Compile Include="Clases\Usuarios.cs" />
     <Compile Include="Clases\Utilitarios.cs" />
+    <Compile Include="EmpleadosAdmin.aspx.cs">
+      <DependentUpon>EmpleadosAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmpleadosAdmin.aspx.designer.cs">
+      <DependentUpon>EmpleadosAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmpleadosIndex.aspx.cs">
+      <DependentUpon>EmpleadosIndex.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmpleadosIndex.aspx.designer.cs">
+      <DependentUpon>EmpleadosIndex.aspx</DependentUpon>
+    </Compile>
     <Compile Include="FacturasAdmin.aspx.cs">
       <DependentUpon>FacturasAdmin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

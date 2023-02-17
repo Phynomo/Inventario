@@ -1067,93 +1067,6 @@ SELECT [usu_Id]
 END
 GO
 
-
---index / buscar cargos
-
-CREATE PROCEDURE UDP_IndexCargos
-AS
-BEGIN
-
-SELECT [car_Id]
-      ,[car_Nombre]
-      ,[car_FechaCreacion]
-      ,[car_UsuarioCreacion]
-      ,[car_FechaModificacion]
-      ,[car_UsuarioModificacion]
-      ,[car_Estado]
-  FROM [dbo].[tbCargos]
-  WHERE car_Estado = 1
-
-
-END
-GO
-
---Insetar Cargo
-
-CREATE PROCEDURE UDP_InsertarCargo
-	@nombre Nvarchar(200),
-	@usuarioCreacion int
-
-AS
-BEGIN
-
-
-INSERT INTO [dbo].[tbCargos]
-           ([car_Nombre]
-           ,[car_FechaCreacion]
-           ,[car_UsuarioCreacion]
-           ,[car_FechaModificacion]
-           ,[car_UsuarioModificacion]
-           ,[car_Estado])
-     VALUES
-           (@nombre
-           ,GetDate()
-           ,@usuarioCreacion
-           ,null
-           ,null
-           ,1)
-
-
-END
-GO
-
-
---borrar Cargo
-CREATE OR ALTER PROCEDURE UDP_BorrarCargo
-	@IdEdicion INT
-AS
-BEGIN
-
-UPDATE [dbo].[tbCargos]
-   SET [car_Estado] = 0
- WHERE car_Id = @IdEdicion
-
-
-END
-GO
-
-
-
---Iditar Cargo
-CREATE PROCEDURE UDP_EdicionCargo
-	@IdEdicion INT,
-	@nombre Nvarchar(90),
-	@usuarioModificacion int
-AS
-BEGIN
-
-
-UPDATE [dbo].[tbCargos]
-   SET [car_Nombre] = @nombre
-      ,[car_FechaModificacion] = GETDATE()
-      ,[car_UsuarioModificacion] = @usuarioModificacion
- WHERE car_Id = @IdEdicion
-
-END
-GO
-
-
-
 --index / buscar Facturas
 
 CREATE PROCEDURE UDP_IndexFacturas
@@ -1206,6 +1119,7 @@ SELECT [facd_Id]
 	  ,t4.metpago_Descripcion
       ,[facd_catidad]
       ,[facd_Precio]
+	  ,t7.pro_Stock
 	  ,[facd_catidad] * [facd_Precio] as CantidadPrecio
 	  ,(select SUM([facd_catidad] * [facd_Precio]) from [dbo].[tbFDetalles] WHERE facd_Estado = 1 AND fac_Id = @FacturaId) as Subtotal
 	  ,(select SUM(([facd_catidad] * [facd_Precio]) *0.15) from [dbo].[tbFDetalles] WHERE facd_Estado = 1 AND fac_Id = @FacturaId) as IVA
@@ -1339,3 +1253,258 @@ UPDATE [dbo].[tbUsuarios]
 
 END
 GO
+
+
+
+--index / buscar Empleados
+
+CREATE OR ALTER PROCEDURE UDP_IndexEmpleados
+AS
+BEGIN
+
+
+SELECT [emp_Id]
+      ,[emp_Nombre]
+      ,[emp_Apellido]
+	  ,emp_Nombre +' '+ emp_Apellido AS Nombre
+      ,[emp_Sexo]
+	  ,CASE
+			WHEN emp_Sexo='M' THEN 'Masculino'
+			WHEN emp_Sexo='F' THEN 'Femenino'
+			ELSE 'Otro'
+		END as Sexo
+      ,t1.[mun_Id]
+	  ,t4.mun_Nombre + ', ' + t5.dep_Nombre as Ciudad
+      ,[emp_DireccionExacta]
+      ,t1.[estciv_Id]
+	  ,t2.estciv_Nombre
+      ,[emp_Telefono]
+      ,[emp_CorreoElectronico]
+      ,[emp_FechaNacimiento]
+	  ,DATEDIFF(YEAR, emp_FechaNacimiento,GetDate()) as Edad
+      ,[emp_FechaContratacion]
+      ,t1.[car_Id]
+	  ,t3.car_Nombre
+      ,[emp_FechaCreacion]
+      ,[emp_UsuarioCreacion]
+      ,[emp_FechaModificacion]
+      ,[emp_UsuarioModificacion]
+      ,[emp_Estado]
+  FROM [dbo].[tbEmpleados] T1 INNER JOIN [dbo].[tbEstadosCiviles] T2
+  ON T1.estciv_Id = T2.estciv_Id Inner JOIN [dbo].[tbCargos] T3
+  ON t3.car_Id = t1.car_Id INNER JOIN [dbo].[tbMunicipios] T4
+  ON t4.mun_Id = t1.mun_Id INNER JOIN [dbo].[tbDepartamentos] T5
+  ON t4.dep_Id = t5.dep_Id
+  WHERE emp_Estado = 1
+
+
+
+END
+GO
+
+
+--Insertar Empleado
+
+CREATE OR ALTER PROCEDURE UDP_InsertarEmpleados
+	@Nombre Nvarchar(150),
+	@Apellido Nvarchar(150),
+	@Sexo char(1),
+	@Municipio Nvarchar(10),
+	@DireccionExacta Nvarchar(500),
+	@EstadoCivil char(1),
+	@Telefono Nvarchar(20),
+	@Correo Nvarchar(100),
+	@FechaNacimiento Nvarchar(100),
+	@FechaContaratacion Nvarchar(100),
+	@Cargo Nvarchar(20),
+	@UsuarioCreacion int
+AS
+BEGIN
+
+INSERT INTO [dbo].[tbEmpleados]
+           ([emp_Nombre]
+           ,[emp_Apellido]
+           ,[emp_Sexo]
+           ,[mun_Id]
+           ,[emp_DireccionExacta]
+           ,[estciv_Id]
+           ,[emp_Telefono]
+           ,[emp_CorreoElectronico]
+           ,[emp_FechaNacimiento]
+           ,[emp_FechaContratacion]
+           ,[car_Id]
+           ,[emp_FechaCreacion]
+           ,[emp_UsuarioCreacion]
+           ,[emp_FechaModificacion]
+           ,[emp_UsuarioModificacion]
+           ,[emp_Estado])
+     VALUES
+           (@Nombre
+           ,@Apellido
+           ,@Sexo
+           ,@Municipio
+           ,@DireccionExacta
+           ,@EstadoCivil
+           ,@Telefono
+           ,@Correo
+           ,@FechaNacimiento
+           ,@FechaContaratacion
+           ,@Cargo
+           ,GETDATE()
+           ,@UsuarioCreacion
+           ,null
+           ,null
+           ,1)
+
+
+
+END
+GO
+
+
+
+
+
+--Insertar Empleado
+
+CREATE OR ALTER PROCEDURE UDP_EditarEmpleados
+	@Id INT,
+	@Nombre Nvarchar(150),
+	@Apellido Nvarchar(150),
+	@Sexo char(1),
+	@Municipio Nvarchar(10),
+	@DireccionExacta Nvarchar(500),
+	@EstadoCivil char(1),
+	@Telefono Nvarchar(20),
+	@Correo Nvarchar(100),
+	@FechaNacimiento Nvarchar(100),
+	@FechaContaratacion Nvarchar(100),
+	@Cargo Nvarchar(20),
+	@UsuarioModificacion int
+AS
+BEGIN
+
+UPDATE [dbo].[tbEmpleados]
+   SET [emp_Nombre] = @Nombre
+      ,[emp_Apellido] = @Apellido
+      ,[emp_Sexo] = @Sexo
+      ,[mun_Id] = @Municipio
+      ,[emp_DireccionExacta] = @DireccionExacta
+      ,[estciv_Id] = @EstadoCivil
+      ,[emp_Telefono] = @Telefono
+      ,[emp_CorreoElectronico] = @Correo
+      ,[emp_FechaNacimiento] = @FechaNacimiento
+      ,[emp_FechaContratacion] = @FechaContaratacion
+      ,[car_Id] = @Cargo
+      ,[emp_FechaModificacion] = GETDATE()
+      ,[emp_UsuarioModificacion] = @UsuarioModificacion
+ WHERE emp_Id = @Id
+
+
+
+END
+GO
+
+
+
+--Insertar Empleado
+
+CREATE OR ALTER PROCEDURE UDP_EliminarEmpleados
+	@Id INT
+AS
+BEGIN
+
+UPDATE [dbo].[tbEmpleados]
+   SET emp_Estado = 0
+ WHERE emp_Id = @Id
+
+
+
+END
+GO
+
+
+
+
+
+
+--Insertar Usuario
+CREATE OR ALTER PROCEDURE UDP_InsertarCargos
+	@Cargo Nvarchar(150),
+	@usuarioCreacion int
+
+AS
+BEGIN
+INSERT INTO [dbo].[tbCargos]
+           ([car_Nombre]
+           ,[car_FechaCreacion]
+           ,[car_UsuarioCreacion]
+           ,[car_FechaModificacion]
+           ,[car_UsuarioModificacion]
+           ,[car_Estado])
+     VALUES
+           (@Cargo
+           ,GETDATE()
+           ,@usuarioCreacion
+           ,null
+           ,null
+           ,1)
+
+
+END
+GO
+
+--Index/Tabla Usuarios
+CREATE OR ALTER PROCEDURE UDP_IndexCargos
+
+AS
+BEGIN
+
+SELECT [car_Id]
+      ,[car_Nombre]
+      ,[car_FechaCreacion]
+      ,[car_UsuarioCreacion]
+      ,[car_FechaModificacion]
+      ,[car_UsuarioModificacion]
+      ,[car_Estado]
+  FROM [dbo].[tbCargos]
+	WHERE car_Estado = 1
+
+END
+GO
+
+
+--Editar Usuario 
+CREATE OR ALTER PROCEDURE UDP_EditarCargo
+	@IdEdicion INT,
+	@Cargo Nvarchar(200),
+	@usuarioModificacion int
+AS
+BEGIN
+
+UPDATE [dbo].[tbCargos]
+   SET [car_Nombre] = @Cargo
+      ,[car_FechaModificacion] = GETDATE()
+      ,[car_UsuarioModificacion] = @usuarioModificacion
+ WHERE car_Id = @IdEdicion
+
+
+END
+GO
+
+
+--borrar Usuario
+CREATE OR ALTER PROCEDURE UDP_BorrarCargo
+	@IdEdicion INT
+AS
+BEGIN
+
+
+UPDATE [dbo].[tbCargos]
+   SET [car_Estado] = 0
+ WHERE car_Id = @IdEdicion
+
+
+END
+GO
+

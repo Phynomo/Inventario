@@ -13,7 +13,6 @@ namespace Inventario.Clases
             string sql = $"EXEC UDP_InsertarFactura '{Cliente}', '{MetodoPago}', '{Empleado}', '{UsuarioCreacion}'";
             util.ObtenerDS(sql,"T");
 
-
         }
 
 
