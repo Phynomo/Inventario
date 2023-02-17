@@ -132,7 +132,7 @@ namespace Inventario
                     sexo = "M";
                 }
 
-                emp.InsetarEmpleado(txtNombre.Text,txtApellido.Text,sexo,ddlMunicipio.SelectedValue,txtDireccionExacata.Value,ddlEstadoCivil.SelectedValue,txtTelefono.Text,txtCorreo.Text,txtFechaNacimiento.Value,txtFechaContratacion.Value,ddlCargo.SelectedValue,"1");
+                emp.InsetarEmpleado(txtNombre.Text,txtApellido.Text,sexo,ddlMunicipio.SelectedValue,txtDireccionExacata.Value,ddlEstadoCivil.SelectedValue,txtTelefono.Text,txtCorreo.Text,txtFechaNacimiento.Value,txtFechaContratacion.Value,ddlCargo.SelectedValue, Session["IdUsuario"].ToString());
 
                 Response.Redirect("EmpleadosIndex.aspx");
             }
@@ -206,7 +206,7 @@ namespace Inventario
                     sexo = "M";
                 }
 
-                emp.EditarEmpleado(Session["IdEmpleado"].ToString(), txtNombre.Text, txtApellido.Text, sexo, ddlMunicipio.SelectedValue, txtDireccionExacata.Value, ddlEstadoCivil.SelectedValue, txtTelefono.Text, txtCorreo.Text, txtFechaNacimentoEditar.Text, txtFechaContratacionEditar.Text, ddlCargo.SelectedValue, "1");
+                emp.EditarEmpleado(Session["IdEmpleado"].ToString(), txtNombre.Text, txtApellido.Text, sexo, ddlMunicipio.SelectedValue, txtDireccionExacata.Value, ddlEstadoCivil.SelectedValue, txtTelefono.Text, txtCorreo.Text, txtFechaNacimentoEditar.Text, txtFechaContratacionEditar.Text, ddlCargo.SelectedValue, Session["IdUsuario"].ToString());
                 Session["IdEmpleado"] = null;
                 Response.Redirect("EmpleadosIndex.aspx");
             }

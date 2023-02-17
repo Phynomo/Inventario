@@ -107,6 +107,7 @@
   <ItemGroup>
     <Content Include="CambiarPassword.aspx" />
     <Content Include="CargosIndex.aspx" />
+    <Content Include="CategoriaIndex.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -765,7 +766,15 @@
     <Compile Include="CargosIndex.aspx.designer.cs">
       <DependentUpon>CargosIndex.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CategoriaIndex.aspx.cs">
+      <DependentUpon>CategoriaIndex.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CategoriaIndex.aspx.designer.cs">
+      <DependentUpon>CategoriaIndex.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Clases\Cargos.cs" />
+    <Compile Include="Clases\Categorias.cs" />
     <Compile Include="Clases\CnxBasedeDatos.cs" />
     <Compile Include="Clases\Empleados.cs" />
     <Compile Include="Clases\Facturas.cs" />

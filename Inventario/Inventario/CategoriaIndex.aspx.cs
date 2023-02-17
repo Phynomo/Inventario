@@ -9,15 +9,15 @@ using System.Web.UI.WebControls;
 
 namespace Inventario
 {
-    public partial class CargosIndex : System.Web.UI.Page
+    public partial class CategoriaIndex : System.Web.UI.Page
     {
 
         Clases.Utilitarios util = new Clases.Utilitarios();
-        Clases.Cargos car = new Clases.Cargos();
+        Clases.Categorias cat = new Clases.Categorias();
 
         public void cargarTabla()
         {
-            DataSet ds = util.ObtenerDS("EXEC UDP_IndexCargos", "T");
+            DataSet ds = util.ObtenerDS("EXEC UDP_IndexCategorias", "T");
 
             StringBuilder html = new StringBuilder();
             Literal cadena = new Literal();
@@ -25,10 +25,10 @@ namespace Inventario
             foreach (DataRow fila in ds.Tables["T"].Rows)
             {
                 html.Append("<tr><td>" +
-                    fila["car_Id"] + "</td><td>" +
-                    fila["car_Nombre"] + "</td><td>" +
-                    "<a class='fa fa-pencil btn btn-block btn-warning' style='color: black' onclick='Editar(" + fila["car_Id"] + ")' ></a>" + "</td><td>" +
-                    "<a class='fa fa-trash btn btn-block btn-danger' style='color: black' onclick='Eliminar(" + fila["car_Id"] + ")' ></a>" + "</td></tr>"
+                    fila["cat_Id"] + "</td><td>" +
+                    fila["cat_Descripcion"] + "</td><td>" +
+                    "<a class='fa fa-pencil btn btn-block btn-warning' style='color: black' onclick='Editar(" + fila["cat_Id"] + ")' ></a>" + "</td><td>" +
+                    "<a class='fa fa-trash btn btn-block btn-danger' style='color: black' onclick='Eliminar(" + fila["cat_Id"] + ")' ></a>" + "</td></tr>"
 
 
                 );
@@ -36,15 +36,15 @@ namespace Inventario
 
             cadena.Text = html.ToString();
 
-            Datos_Cargos.Controls.Add(cadena);
+            Datos_Categorias.Controls.Add(cadena);
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             cargarTabla();
 
-            lblCargoEditarAste.Visible = false;
-            lblCargoGuardarAste.Visible = false;
+            lblCategoriaEditarAste.Visible = false;
+            lblCategoriaGuardarAste.Visible = false;
 
             if (!IsPostBack)
             {
@@ -68,14 +68,15 @@ namespace Inventario
                     Eliminar(eventargument);
                 }
             }
-
         }
+
+
 
         public void Editar(string id)
         {
-            if (Session["IdCargo"] == null)
+            if (Session["IdCategoria"] == null)
             {
-                Session["IdCargo"] = id;
+                Session["IdCategoria"] = id;
                 CargarDatos(id);
             }
 
@@ -84,50 +85,50 @@ namespace Inventario
 
         public void Eliminar(string id)
         {
-            car.EliminarCargo(id);
-            Response.Redirect("CargosIndex.aspx");
+            cat.EliminarCategoria(id);
+            Response.Redirect("CategoriaIndex.aspx");
         }
 
         public void CargarDatos(string id)
         {
             DataSet ds = new DataSet();
-            string sql = $"SELECT * FROM [dbo].[tbCargos] Where car_Id = '{id}'";
+            string sql = $"SELECT * FROM [dbo].[tbCategoria] Where cat_Id = '{id}'";
             ds = util.ObtenerDS(sql, "T");
 
-            txtCargoEditar.Text = ds.Tables["T"].Rows[0]["car_Nombre"].ToString();
+            txtCategoriaEditar.Text = ds.Tables["T"].Rows[0]["cat_Descripcion"].ToString();
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (txtCargoGuardar.Text != "")
+            if (txtCategoriaGuardar.Text != "")
             {
-                car.InsertarCargos(txtCargoGuardar.Text, Session["IdUsuario"].ToString());
-                Session["IdCargo"] = null;
-                Response.Redirect("CargosIndex.aspx");
+                cat.InsertarCategoria(txtCategoriaGuardar.Text, Session["IdUsuario"].ToString());
+                Session["IdCategoria"] = null;
+                Response.Redirect("CategoriaIndex.aspx");
             }
             else
             {
-                if (txtCargoGuardar.Text == "")
+                if (txtCategoriaGuardar.Text == "")
                 {
-                    lblCargoGuardarAste.Visible = true;
+                    lblCategoriaGuardarAste.Visible = true;
                 }
             }
         }
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
-            if (txtCargoEditar.Text != "")
+            if (txtCategoriaEditar.Text != "")
             {
 
-                car.EditarGargos(Session["IdCargo"].ToString(), txtCargoEditar.Text, Session["IdUsuario"].ToString());
-                Session["IdCargo"] = null;
-                Response.Redirect("CargosIndex.aspx");
+                cat.EditarCategoria(Session["IdCategoria"].ToString(), txtCategoriaEditar.Text, Session["IdUsuario"].ToString());
+                Session["IdCategoria"] = null;
+                Response.Redirect("CategoriaIndex.aspx");
             }
             else
             {
-                if (txtCargoEditar.Text == "")
+                if (txtCategoriaEditar.Text == "")
                 {
-                    lblCargoEditarAste.Visible = true;
+                    lblCategoriaEditarAste.Visible = true;
                 }
             }
         }
@@ -136,9 +137,11 @@ namespace Inventario
 
         protected void btnCancelar_ServerClick(object sender, EventArgs e)
         {
-            Session["IdCargo"] = null;
-            Response.Redirect("CargosIndex.aspx");
+            Session["IdCategoria"] = null;
+            Response.Redirect("CategoriaIndex.aspx");
         }
+
+
 
     }
 }

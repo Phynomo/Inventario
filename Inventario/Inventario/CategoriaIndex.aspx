@@ -1,11 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CargosIndex.aspx.cs" Inherits="Inventario.CargosIndex" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CategoriaIndex.aspx.cs" Inherits="Inventario.CategoriaIndex" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-
-     <div class="container card">
+         <div class="container card">
         <div class="row card-header text-center">
             <div class="col">
-                <h4><asp:Label Text="Cargos" runat="server" /> </h4> 
+                <h4><asp:Label Text="Categorias" runat="server" /> </h4> 
             </div>
             <div class="col d-flex flex-row-reverse">
                <button  type="button" class="btn btn-primary" id="btnNuevo" onclick="ModalGuardar()">Nuevo</button>
@@ -24,7 +23,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <asp:PlaceHolder ID="Datos_Cargos" runat="server"></asp:PlaceHolder>
+                            <asp:PlaceHolder ID="Datos_Categorias" runat="server"></asp:PlaceHolder>
                         </tbody>
                     </table>
                 </div>
@@ -38,14 +37,14 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Ingresar Cargo</h5>
+              <h5 class="modal-title">Ingresar Categoria</h5>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col">
-                        <asp:Label CssClass="" ID="lblCargo" runat="server" Text="Cargo"></asp:Label>
-                        <asp:Label CssClass="" ID="lblCargoGuardarAste" ForeColor="Red" runat="server" Text="*"></asp:Label>
-                        <asp:TextBox CssClass="form-control" ID="txtCargoGuardar" runat="server"></asp:TextBox>
+                        <asp:Label CssClass="" ID="lblCategoriaGuardar" runat="server" Text="Categoria"></asp:Label>
+                        <asp:Label CssClass="" ID="lblCategoriaGuardarAste" ForeColor="Red" runat="server" Text="*"></asp:Label>
+                        <asp:TextBox CssClass="form-control" ID="txtCategoriaGuardar" runat="server"></asp:TextBox>
                     </div>
                 </div>
             </div>
@@ -62,14 +61,14 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Editar Cargo</h5>
+              <h5 class="modal-title">Editar Categoria</h5>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col">
-                        <asp:Label CssClass="" ID="lblCargoEditar" runat="server" Text="Cargo"></asp:Label>
-                        <asp:Label CssClass="" ID="lblCargoEditarAste" ForeColor="Red" runat="server" Text="*"></asp:Label>
-                        <asp:TextBox CssClass="form-control" ID="txtCargoEditar" runat="server"></asp:TextBox>
+                        <asp:Label CssClass="" ID="lblCategoriaEditar" runat="server" Text="Categoria"></asp:Label>
+                        <asp:Label CssClass="" ID="lblCategoriaEditarAste" ForeColor="Red" runat="server" Text="*"></asp:Label>
+                        <asp:TextBox CssClass="form-control" ID="txtCategoriaEditar" runat="server"></asp:TextBox>
                     </div>
                 </div>
             </div>
@@ -92,6 +91,7 @@
             $('#mdlEditar').modal({ backdrop: 'static', keyboard: false })
         }
      </script>
+
 
 
 </asp:Content>

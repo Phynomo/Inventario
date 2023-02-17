@@ -139,7 +139,7 @@ namespace Inventario
 
                 if (stock > 0)
                 {
-                    factu.InsertarFacturaDetalles(Session["FacDetalles"].ToString(), ddlProducto.SelectedValue, txtCantidad.Text, "1");
+                    factu.InsertarFacturaDetalles(Session["FacDetalles"].ToString(), ddlProducto.SelectedValue, txtCantidad.Text, Session["IdUsuario"].ToString());
                     cargarTabla();
                     ddlProducto.SelectedValue = "0";
                     txtCantidad.Text = "";
@@ -172,7 +172,7 @@ namespace Inventario
         {
             if (ddlCliente.SelectedValue != "0" && ddlMetodoPago.SelectedValue != "0")
             {
-                factu.InsertarFactura(ddlCliente.SelectedValue, "1", "1", ddlMetodoPago.SelectedValue);
+                factu.InsertarFactura(ddlCliente.SelectedValue, Session["IdEmpleado"].ToString(), Session["IdUsuario"].ToString(), ddlMetodoPago.SelectedValue);
 
                 string sql = "SELECT MAX(fac_Id) as Maximo FROM [Tienda_Inventario].[dbo].[tbFactura]";
                 DataSet ds = new DataSet();

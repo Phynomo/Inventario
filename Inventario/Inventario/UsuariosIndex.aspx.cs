@@ -101,7 +101,7 @@ namespace Inventario
             if (txtUsuarioGuardar.Text != "" && txtContraseniaGuardar.Text != "" && ddlEmpleadoGuardar.SelectedValue !="0")
             {
                 //usu.InsertarUsuario(txtUsuarioGuardar.Text,txtContraseniaGuardar.Text,ddlEmpleadoGuardar.SelectedValue, Session["IdUsuario"].ToString());
-                usu.InsertarUsuario(txtUsuarioGuardar.Text, txtContraseniaGuardar.Text, ddlEmpleadoGuardar.SelectedValue, "1");
+                usu.InsertarUsuario(txtUsuarioGuardar.Text, txtContraseniaGuardar.Text, ddlEmpleadoGuardar.SelectedValue, Session["IdUsuario"].ToString());
                 Session["IdUsuarios"] = null;
                 Response.Redirect("UsuariosIndex.aspx");
             }
@@ -138,7 +138,7 @@ namespace Inventario
         {
             if (txtContraseniaEditar.Text != "" && ddlEmpleadoEditar.SelectedValue != "0")
             {
-                usu.EditarUsuario(Session["IdUsuarios"].ToString(), txtContraseniaEditar.Text, ddlEmpleadoEditar.SelectedValue, "1");
+                usu.EditarUsuario(Session["IdUsuarios"].ToString(), txtContraseniaEditar.Text, ddlEmpleadoEditar.SelectedValue, Session["IdUsuario"].ToString());
                 Session["IdUsuarios"] = null;
                 Response.Redirect("UsuariosIndex.aspx");
             }
