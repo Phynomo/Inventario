@@ -91,12 +91,6 @@ CONSTRAINT PK_dbo_tbCategoria_cat_Id PRIMARY KEY(cat_Id),
 	CONSTRAINT FK_dbo_tbCategoria_dbo_tbUsuarios_cat_UsuarioModificacion_usu_Id FOREIGN KEY(cat_UsuarioModificacion) REFERENCES tbUsuarios(usu_Id)
 );
 
---INSERT INTO tbCategoria
---VALUES ('Juguetes'),
---       ('Lacteos'),
---	   ('Cosméticos'),
---	   ('Frutas y Verduras'),
---	   ('Carnes')
 
 
 --------------------------------------------------------------------
@@ -132,10 +126,6 @@ metpago_Descripcion NVARCHAR (100) NOT NULL,
 	CONSTRAINT FK_dbo_tbMetodoPago_dbo_tbUsuarios_metpago_UsuarioModificacion_usu_Id FOREIGN KEY(metpago_UsuarioModificacion) REFERENCES tbUsuarios(usu_Id)
 
 );
---INSERT INTO tbMetodoPago
---VALUES	('C','Tarjeta Credito'),
---		('D','Tarjeta Debito'),
---		('E','Efectivo');
 
 ------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------
@@ -160,12 +150,6 @@ CONSTRAINT FK_dbo_tbProveedores_dbo_tbUsuarios_prov_UsuarioModificacion_usu_Id F
 
 	
 );
-
---INSERT INTO tbProveedores
---VALUES('IMSA','Choloma Cortes','23124536','imsa123@gmail.com'),
---      ('Jugeteria Maria','Choloma Cortes','93124536','jugetesmaria@gmail.com'),
---	  ('AVON','San Pedro Sula, Cortes','94567536','avonofc@gmail.com'),
---	  ('Lacteos Jose','Choloma Cortes','33424536','lacteosjose@gmail.com');
 
 
 ------------------------------------------------------------------------------------------
@@ -192,18 +176,7 @@ CONSTRAINT FK_dbo_tbProductos_dbo_tbUsuarios_pro_UsuarioCreacion_usu_Id FOREIGN 
 CONSTRAINT FK_dbo_tbProductos_dbo_tbUsuarios_pro_UsuarioModificacion_usu_Id FOREIGN KEY(pro_UsuarioModificacion) REFERENCES tbUsuarios(usu_Id)
 
 );
---INSERT INTO tbProductos
---VALUES ('Malteada de chocolate',15,250,2,4),
---       ('Banano',5.25,80,4,4),
---	   ('Malteada de fresa',15,125,2,4),
---	   ('Asistin Lavanda',20,35,3,3),
---	   ('Mantequilla',25,160,2,4),
---	   ('Escoba Quica',45.252,10,3,3),
---	   ('Carro mac',15.206,25,1,2),
---	   ('Cacao',25,55,4,1),
---	   ('trapeador ',65,25,3,1),
---	   ('Juguete Bob const ',150,150,1,2),
---	   ('Tajo de res ',45,101,5,4);
+
 ------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------
 
@@ -228,17 +201,7 @@ CONSTRAINT FK_dbo_tbClientes_dbo_tbUsuarios_cli_UsuarioCreacion_usu_Id FOREIGN K
 CONSTRAINT FK_dbo_tbClientes_dbo_tbUsuarios_cli_UsuarioModificacion_usu_Id FOREIGN KEY(cli_UsuarioModificacion) REFERENCES tbUsuarios(usu_Id)
 
 );
---INSERT INTO tbClientes
---VALUES('Marta','Alvarado',' San Pedro Sula, Cortes','11-20-1993','98784565','martinezmarta@gmail.com'),
---      ('Alexander','Gutierrez','Choloma , Cortes','07-15-2000','88564205','alexguz0291@gmail.com'),
---      ('Daniel','Perez','San Pedro Sula, Cortes','02-04-2001','32724455','per00daniel@gmail.com'),
---      ('Cecilia','Lopez','La Lima, Cortes','11-18-2003','94358855','locaceci@gmail.com'),
---      ('Pedro','Perez','San Pedro Sula, Cortes','08-04-2001','94529572','pesau@gmail.com'),
---      ('Rut','Santos','Choloma , Cortes','09-11-2002','99698848','rutlaguerrera@gmail.com'),
---      ('Sara','Moraz','San Pedro Sula, Cortes','05-07-1999','92549019','samoraz@gmail.com'),
---       ('Jesus','Santos',' Choloma,Cortes','10-15-2001','88262541','jesussalvador@gmail.com'),
---       ('Danilo','Beltran','San Pedro Sula, Cortes','02-11-2000','98121879','beltran69@gmail.com'),
---       ('Belsebu','Hernandez','San Pedro Sula, Cortes','02-11-2004','98111879','beltran69@gmail.com');
+
 ------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------
 
@@ -298,15 +261,6 @@ CONSTRAINT FK_dbo_tbFactura_dbo_tbUsuarios_fac_UsuarioModificacion_usu_Id FOREIG
 
 );
 
---INSERT INTO tbFactura
---VALUES (1,'11-20-2020',2),
---               (2,'11-21-2020',1),
---			   (4,'11-22-2020',2),
---			   (3,'11-23-2020',1),
---			   (5,'11-24-2020',2),
---			   (7,'11-25-2020',1),
---			   (8,'11-26-2020',2),
---			   (10,'11-26-2020',2)
 --------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------
 
@@ -330,33 +284,6 @@ CONSTRAINT FK_dbo_tbFDetalles_dbo_tbUsuarios_facd_UsuarioModificacion_usu_Id FOR
 
 );
 
---INSERT INTO  tbFDetalles
---VALUES			(1,1,2,2*15),
---				(1,2,5,5*5.25),
---				(1,3,1,1*15),
---				(2,4,1,1*20),
---				(2,9,1,1*65),
---				(2,6,2,2*45.52),
---				(3,1,3,3*15),
---				(3,7,1,1*26),
---				(3,8,2,2*25),
---				(4,10,2,2*15),
---				(4,3,5,5*15),
---				(4,4,4,4*20),
---				(5,8,2,2*25),
---				(5,1,1,1*15),
---				(5,6,1,1*45.52),
---				(6,10,1,1*150),
---				(6,2,3,3*5.25),
---				(6,1,2,2*15),
---				(7,1,2,2*15),
---				(7,10,2,2*150),
---				(7,2,2,2*5.25),
---				(8,1,2,2*15),
---				(8,2,2,2*5.50),
---				(8,3,2,2*15),
---				(8,4,2,2*20),
---				(8,6,3,3*45)
 
 ------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------
@@ -407,26 +334,6 @@ CONSTRAINT FK_dbo_tbCDetalles_dbo_tbUsuarios_comd_UsuarioModificacion_usu_Id FOR
 ------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------
 
-----Inventario
-
---CREATE TABLE tbInventario(
---inv_Id                              INT IDENTITY(1,1),
---pro_Id								INT,
---prov_Id                             INT,
---inv_Stock							INT NOT NULL,
---inv_FechaCreacion					DATETIME,
---inv_UsuarioCreacion					INT,
---inv_FechaModificacion				DATETIME,
---inv_UsuarioModificacion				INT,
---inv_Estado							BIT,
-
---CONSTRAINT PK_dbo_tbInventario_inv_Id PRIMARY KEY(inv_Id),
---CONSTRAINT FK_dbo_tbInventario_tbProveedores_prov_id FOREIGN KEY(prov_Id) REFERENCES tbProveedores(prov_Id),
---CONSTRAINT FK_dbo_tbInventario_tbProductos_pro_id FOREIGN KEY(pro_Id) REFERENCES tbProductos(pro_Id),
---CONSTRAINT FK_dbo_tbInventario_dbo_tbUsuarios_inv_UsuarioCreacion_usu_Id FOREIGN KEY(inv_UsuarioCreacion) REFERENCES tbUsuarios(usu_Id),
---CONSTRAINT FK_dbo_tbInventario_dbo_tbUsuarios_inv_UsuarioModificacion_usu_Id FOREIGN KEY(inv_UsuarioModificacion) REFERENCES tbUsuarios(usu_Id)
-
---);
 
 ---------------------------------------------------------------------------------------
 
