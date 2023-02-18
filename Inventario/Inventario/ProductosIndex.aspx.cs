@@ -85,8 +85,8 @@ namespace Inventario
                     fila["cat_Descripcion"] + "</td><td>" +
                     fila["prov_Nombre"] + "</td><td>" +
                     fila["pro_Stock"] + "</td><td>" +
-                    "<a class='fa fa-pencil btn btn-warning' style='color: black' onclick='Editar(" + fila["pro_Id"] + ")'></a>" + "</td><td>" +
-                    "<a class='fa fa-trash btn btn-danger' style='color:black' onclick='Borrar(" + fila["pro_Id"] + ") '></a>" + "</td></tr>"
+                    "<a class='fa fa-pencil btn btn-block btn-warning' style='color: black' onclick='Editar(" + fila["pro_Id"] + ")'></a>" + "</td><td>" +
+                    "<a class='fa fa-trash btn btn-block btn-danger' style='color:black' onclick='Borrar(" + fila["pro_Id"] + ") '></a>" + "</td></tr>"
                     );
             }
             cadena.Text = html.ToString();

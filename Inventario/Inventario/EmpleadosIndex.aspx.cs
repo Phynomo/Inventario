@@ -29,12 +29,9 @@ namespace Inventario
                     fila["Edad"] + "</td><td>" +
                     fila["Sexo"] + "</td><td>" +
                     fila["car_Nombre"] + "</td><td>" +
-                    fila["emp_FechaContratacion"] + "</td><td>" +
                     fila["Ciudad"] + "</td><td>" +
                     fila["emp_DireccionExacta"] + "</td><td>" +
-                    fila["estciv_Nombre"] + "</td><td>" +
                     fila["emp_Telefono"] + "</td><td>" +
-                    fila["emp_CorreoElectronico"] + "</td><td>" +
                     "<a class='fa fa-pencil btn btn-block btn-warning' style='color: black' onclick='Editar(" + fila["emp_Id"] + ")' ></a>" + "</td><td>" +
                     "<a class='fa fa-trash btn btn-block btn-danger' style='color: black' onclick='Eliminar(" + fila["emp_Id"] + ")' ></a>" + "</td></tr>"
 
@@ -52,6 +49,7 @@ namespace Inventario
             cargarTabla();
             if (!IsPostBack)
             {
+                Session["IdEmpleado"] = null;
             }
             else
             {

@@ -83,8 +83,8 @@ namespace Inventario
                     fila["prov_DireccionExacta"] + "</td><td>" +
                     fila["prov_Telefono"] + "</td><td>" +
                     fila["prov_Email"] + "</td><td>" +
-                    "<a class='fa fa-pencil btn btn-warning' style='color: black' onclick='Editar(" + fila["prov_Id"] + ")'></a>" + "</td><td>" +
-                    "<a class='fa fa-trash btn btn-danger' style='color:black' onclick='Eliminar(" + fila["prov_Id"] + ") '></a>" + "</td></tr>"
+                    "<a class='fa fa-pencil btn btn-block btn-warning' style='color: black' onclick='Editar(" + fila["prov_Id"] + ")'></a>" + "</td><td>" +
+                    "<a class='fa fa-trash btn btn-block btn-danger' style='color:black' onclick='Eliminar(" + fila["prov_Id"] + ") '></a>" + "</td></tr>"
                     );
             }
             cadena.Text = html.ToString();

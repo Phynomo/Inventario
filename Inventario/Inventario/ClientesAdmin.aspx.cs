@@ -15,9 +15,15 @@ namespace Inventario
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            lblNombreAste.Visible = false;
+            lblApellidoAste.Visible = false;
+            lblDepartamentoAste.Visible = false;
+            lblMunicipioAste.Visible = false;
+            lblDireccionAste.Visible = false;
+            lblTelefonoAste.Visible = false;
+            lblEmailAste.Visible = false;
 
 
-            
 
             if (!IsPostBack)
             {
@@ -83,9 +89,25 @@ namespace Inventario
 
         protected void btnEditar_ServerClick(object sender, EventArgs e)
         {
-            string id = Session["cli_Id"].ToString();
-            ActualizarDatos(id, txtnombre.Value, txtApellido.Value, ddlMunicipio.SelectedValue, txtdireccion.Value, txtTelefono.Value, txtEmail.Value);
-            Session["cli_Id"] = null;
+
+
+            if (txtnombre.Value != "" && txtApellido.Value != "" && ddlDepartamento.SelectedValue != "0" && ddlMunicipio.SelectedValue != "0" && txtdireccion.Value != "" && txtTelefono.Value != "" && txtEmail.Value != "")
+            {
+                string id = Session["cli_Id"].ToString();
+                ActualizarDatos(id, txtnombre.Value, txtApellido.Value, ddlMunicipio.SelectedValue, txtdireccion.Value, txtTelefono.Value, txtEmail.Value);
+                Session["cli_Id"] = null;
+            }
+            else
+            {
+                if (txtnombre.Value == "") { lblNombreAste.Visible = true; }
+                if (txtApellido.Value == "") { lblApellidoAste.Visible = true; }
+                if (ddlDepartamento.SelectedValue == "0") { lblDepartamentoAste.Visible = true; }
+                if (ddlMunicipio.SelectedValue == "0") { lblMunicipioAste.Visible = true; }
+                if (txtdireccion.Value == "") { lblDireccionAste.Visible = true; }
+                if (txtTelefono.Value == "") { lblTelefonoAste.Visible = true; }
+                if (txtEmail.Value == "") { lblEmailAste.Visible = true; }
+            }
+
 
         }
 
@@ -99,8 +121,24 @@ namespace Inventario
 
         protected void btnNuevo_ServerClick(object sender, EventArgs e)
         {
-            AgregarDatos(txtnombre.Value, txtApellido.Value, ddlMunicipio.SelectedValue, txtdireccion.Value, txtTelefono.Value, txtEmail.Value);
-            Response.Redirect("ClientesIndex.aspx");
+
+            if (txtnombre.Value != "" && txtApellido.Value != "" && ddlDepartamento.SelectedValue != "0" && ddlMunicipio.SelectedValue != "0" && txtdireccion.Value != "" && txtTelefono.Value != "" && txtEmail.Value != "")
+            {
+                AgregarDatos(txtnombre.Value, txtApellido.Value, ddlMunicipio.SelectedValue, txtdireccion.Value, txtTelefono.Value, txtEmail.Value);
+                Response.Redirect("ClientesIndex.aspx");
+            }
+            else
+            {
+                if (txtnombre.Value == "") { lblNombreAste.Visible = true; }
+                if (txtApellido.Value == "") { lblApellidoAste.Visible = true; }
+                if (ddlDepartamento.SelectedValue == "0") { lblDepartamentoAste.Visible = true; }
+                if (ddlMunicipio.SelectedValue == "0") { lblMunicipioAste.Visible = true; }
+                if (txtdireccion.Value == "") { lblDireccionAste.Visible = true; }
+                if (txtTelefono.Value == "") { lblTelefonoAste.Visible = true; }
+                if (txtEmail.Value == "") { lblEmailAste.Visible = true; }
+            }
+
+
         }
     }
 }

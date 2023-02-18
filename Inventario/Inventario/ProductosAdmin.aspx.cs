@@ -15,8 +15,12 @@ namespace Inventario
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            lblNombreAste.Visible = false;
+            lblPrecioAste.Visible = false;
+            lblCateriaAste.Visible = false;
+            lblProveedoresAste.Visible = false;
+            lblStockAste.Visible = false;
 
-            
 
             if (!IsPostBack)
             {
@@ -82,15 +86,40 @@ namespace Inventario
 
         protected void btnEditar_ServerClick(object sender, EventArgs e)
         {
-            string id = Session["pro_Id"].ToString();
-            ActualizarDatos(id, txtnombre.Value, txtPrecio.Value, ddlCategoria.SelectedValue, ddlCategoria.SelectedValue, txtStock.Value);
+            if (txtnombre.Value != "" && txtPrecio.Value != "" && ddlCategoria.SelectedValue != "0" && ddlProveedores.SelectedValue != "0" && txtStock.Value != "")
+            {
+                string id = Session["pro_Id"].ToString();
+                ActualizarDatos(id, txtnombre.Value, txtPrecio.Value, ddlCategoria.SelectedValue, ddlProveedores.SelectedValue, txtStock.Value);
+            }
+            else
+            {
+                if (txtnombre.Value == "") { lblNombreAste.Visible = true; }
+                if (txtPrecio.Value == "") { lblPrecioAste.Visible = true; }
+                if (ddlCategoria.SelectedValue == "0") { lblCateriaAste.Visible = true; }
+                if (ddlProveedores.SelectedValue == "0") { lblProveedoresAste.Visible = true; }
+                if (txtStock.Value == "") { lblStockAste.Visible = true; }
+            }
+
         }
 
 
         protected void btnNuevo_ServerClick(object sender, EventArgs e)
         {
-            AgregarDatos(txtnombre.Value, txtPrecio.Value, ddlCategoria.SelectedValue, ddlCategoria.SelectedValue, txtStock.Value);
-            Response.Redirect("ProductosIndex.aspx");
+
+
+            if (txtnombre.Value != "" && txtPrecio.Value != "" && ddlCategoria.SelectedValue != "0" && ddlProveedores.SelectedValue != "0" && txtStock.Value != "")
+            {
+                AgregarDatos(txtnombre.Value, txtPrecio.Value, ddlCategoria.SelectedValue, ddlCategoria.SelectedValue, txtStock.Value);
+                Response.Redirect("ProductosIndex.aspx");
+            }
+            else
+            {
+                if (txtnombre.Value == "") { lblNombreAste.Visible = true; }
+                if (txtPrecio.Value == "") { lblPrecioAste.Visible = true; }
+                if (ddlCategoria.SelectedValue == "0") { lblCateriaAste.Visible = true; }
+                if (ddlProveedores.SelectedValue == "0") { lblProveedoresAste.Visible = true; }
+                if (txtStock.Value == "") { lblStockAste.Visible = true; }
+            }
         }
     }
 }

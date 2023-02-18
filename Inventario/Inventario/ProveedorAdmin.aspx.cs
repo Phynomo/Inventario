@@ -16,6 +16,12 @@ namespace Inventario
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            lblNombreAste.Visible = false;
+            lblDepartamentoAste.Visible = false;
+            lblMunicipioAste.Visible = false;
+            lblDireccionAste.Visible = false;
+            lblEmailAste.Visible = false;
+            lblTelefonoAste.Visible = false;
 
             //btnCancelar.Visible = true;
             //btnEditar.Visible = false;
@@ -79,8 +85,20 @@ namespace Inventario
 
         protected void btnEditar_ServerClick(object sender, EventArgs e)
         {
-            string id = Session["prov_Id"].ToString();
-            ActualizarDatos(id, txtnombre.Value, ddlMunicipio.SelectedValue, txtdireccion.Value, txtTelefono.Value, txtEmail.Value);
+            if (txtnombre.Value != "" && ddlMunicipio.SelectedValue != "0" && txtdireccion.Value != "" && txtTelefono.Value != "" && txtEmail.Value != "")
+            {
+                string id = Session["prov_Id"].ToString();
+                ActualizarDatos(id, txtnombre.Value, ddlMunicipio.SelectedValue, txtdireccion.Value, txtTelefono.Value, txtEmail.Value);
+
+            }
+            else
+            {
+                if (txtnombre.Value == "") { lblNombreAste.Visible = true; }
+                if (ddlMunicipio.SelectedValue == "0") { lblMunicipioAste.Visible = true; }
+                if (txtdireccion.Value == "") { lblDireccionAste.Visible = true; }
+                if (txtTelefono.Value == "") { lblTelefonoAste.Visible = true; }
+                if (txtEmail.Value == "") { lblEmailAste.Visible = true; }
+            }
 
         }
 
@@ -94,8 +112,21 @@ namespace Inventario
 
         protected void btnNuevo_ServerClick(object sender, EventArgs e)
         {
-            AgregarDatos(txtnombre.Value, ddlMunicipio.SelectedValue, txtdireccion.Value, txtTelefono.Value, txtEmail.Value);
-            Response.Redirect("ProveedoresIndex.aspx");
+
+            if (txtnombre.Value != "" && ddlMunicipio.SelectedValue != "0" && txtdireccion.Value != "" && txtTelefono.Value != "" && txtEmail.Value != "")
+            {
+                AgregarDatos(txtnombre.Value, ddlMunicipio.SelectedValue, txtdireccion.Value, txtTelefono.Value, txtEmail.Value);
+                Response.Redirect("ProveedoresIndex.aspx");
+
+            }
+            else
+            {
+                if (txtnombre.Value == "") { lblNombreAste.Visible = true; }
+                if (ddlMunicipio.SelectedValue == "0") { lblMunicipioAste.Visible = true; }
+                if (txtdireccion.Value == "") { lblDireccionAste.Visible = true; }
+                if (txtTelefono.Value == "") { lblTelefonoAste.Visible = true; }
+                if (txtEmail.Value == "") { lblEmailAste.Visible = true; }
+            }
         }
 
     }

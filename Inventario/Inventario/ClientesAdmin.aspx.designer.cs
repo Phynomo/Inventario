@@ -15,6 +15,15 @@ namespace Inventario
     {
 
         /// <summary>
+        /// Control lblNombreAste.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNombreAste;
+
+        /// <summary>
         /// Control txtnombre.
         /// </summary>
         /// <remarks>
@@ -22,6 +31,15 @@ namespace Inventario
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtnombre;
+
+        /// <summary>
+        /// Control lblApellidoAste.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblApellidoAste;
 
         /// <summary>
         /// Control txtApellido.
@@ -33,6 +51,15 @@ namespace Inventario
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtApellido;
 
         /// <summary>
+        /// Control lblDepartamentoAste.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDepartamentoAste;
+
+        /// <summary>
         /// Control ddlDepartamento.
         /// </summary>
         /// <remarks>
@@ -40,6 +67,15 @@ namespace Inventario
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlDepartamento;
+
+        /// <summary>
+        /// Control lblMunicipioAste.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMunicipioAste;
 
         /// <summary>
         /// Control ddlMunicipio.
@@ -51,6 +87,15 @@ namespace Inventario
         protected global::System.Web.UI.WebControls.DropDownList ddlMunicipio;
 
         /// <summary>
+        /// Control lblDireccionAste.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDireccionAste;
+
+        /// <summary>
         /// Control txtdireccion.
         /// </summary>
         /// <remarks>
@@ -60,6 +105,15 @@ namespace Inventario
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtdireccion;
 
         /// <summary>
+        /// Control lblTelefonoAste.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTelefonoAste;
+
+        /// <summary>
         /// Control txtTelefono.
         /// </summary>
         /// <remarks>
@@ -67,6 +121,15 @@ namespace Inventario
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtTelefono;
+
+        /// <summary>
+        /// Control lblEmailAste.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEmailAste;
 
         /// <summary>
         /// Control txtEmail.

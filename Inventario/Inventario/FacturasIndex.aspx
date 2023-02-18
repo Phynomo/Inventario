@@ -13,7 +13,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    <table class="table">
+                    <table class="table" id="example">
                         <thead>
                             <tr>
                                 <th>ID</th>

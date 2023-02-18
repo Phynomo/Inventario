@@ -196,19 +196,51 @@ namespace Inventario
                 && ddlMunicipio.SelectedValue != "0" && txtDireccionExacata.Value != "" && txtFechaNacimentoEditar.Text != "" && ddlCargo.SelectedValue != "0"
                 && txtFechaContratacionEditar.Text != "" && txtTelefono.Text != "" && txtCorreo.Text != "")
             {
-                string sexo = "O";
-                if (rbF.Checked)
-                {
-                    sexo = "F";
-                }
-                else if (rbM.Checked)
-                {
-                    sexo = "M";
-                }
 
-                emp.EditarEmpleado(Session["IdEmpleado"].ToString(), txtNombre.Text, txtApellido.Text, sexo, ddlMunicipio.SelectedValue, txtDireccionExacata.Value, ddlEstadoCivil.SelectedValue, txtTelefono.Text, txtCorreo.Text, txtFechaNacimentoEditar.Text, txtFechaContratacionEditar.Text, ddlCargo.SelectedValue, Session["IdUsuario"].ToString());
-                Session["IdEmpleado"] = null;
-                Response.Redirect("EmpleadosIndex.aspx");
+                try
+                {
+                    Convert.ToDateTime(txtFechaNacimentoEditar.Text);
+                    Convert.ToDateTime(txtFechaContratacionEditar.Text);
+
+                    string sexo = "O";
+                    if (rbF.Checked)
+                    {
+                        sexo = "F";
+                    }
+                    else if (rbM.Checked)
+                    {
+                        sexo = "M";
+                    }
+
+                    emp.EditarEmpleado(Session["IdEmpleado"].ToString(), txtNombre.Text, txtApellido.Text, sexo, ddlMunicipio.SelectedValue, txtDireccionExacata.Value, ddlEstadoCivil.SelectedValue, txtTelefono.Text, txtCorreo.Text, txtFechaNacimentoEditar.Text, txtFechaContratacionEditar.Text, ddlCargo.SelectedValue, Session["IdUsuario"].ToString());
+                    Session["IdEmpleado"] = null;
+                    Response.Redirect("EmpleadosIndex.aspx");
+
+
+                }
+                catch
+                {
+                    try
+                    {
+                        Convert.ToDateTime(txtFechaNacimentoEditar.Text);
+                    }
+                    catch
+                    {
+                        lblFechaNacimientoAste.Visible = true;
+                    }
+                    try
+                    {
+                        Convert.ToDateTime(txtFechaContratacionEditar.Text);
+                    }
+                    catch
+                    {
+                        lblFechaContratacionAste.Visible = true;
+                    }
+                }
+                    
+                
+
+                
             }
             else
             {

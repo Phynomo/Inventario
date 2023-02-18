@@ -13,7 +13,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    <table class="table">
+                    <table class="table" id="example">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -21,12 +21,9 @@
                                 <th>Edad</th>
                                 <th>Sexo</th>
                                 <th>Cargo</th>
-                                <th>Fecha Contratacion</th>
-                                <th>Ciudad</th>
+                                <th>Ciudad/Departamento</th>
                                 <th>Direccion Exacta</th>
-                                <th>Estado Civil</th>
                                 <th>Telefono</th>
-                                <th>Correo</th>
                                 <th>Editar</th>
                                 <th>Borrar</th>
                             </tr>

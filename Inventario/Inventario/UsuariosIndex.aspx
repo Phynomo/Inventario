@@ -6,14 +6,14 @@
             <div class="col">
                 <h4><asp:Label Text="Usuarios" runat="server" /> </h4> 
             </div>
-            <div class="col d-flex flex-row-reverse">
-                <button  type="button" class="btn btn-primary" id="btnNuevo" runat="server" onserverclick="btnNuevo_ServerClick">Nuevo</button>
+            <div class="col-3 d-flex flex-row-reverse">
+                <button  type="button" class="btn btn-block btn-primary" id="btnNuevo" runat="server" onserverclick="btnNuevo_ServerClick">Nuevo</button>
             </div>
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    <table class="table">
+                    <table class="table" id="example">
                         <thead>
                             <tr>
                                 <th>ID</th>
